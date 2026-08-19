@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>DEFNE — Telefon Önizleme</title>
+<style>
+  body { margin: 0; background: oklch(0.22 0.01 250); }
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px;">
+  <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" title="" hint-size="402,874">
+    <div style="width:100%;height:100%;overflow:auto;">
+      <dc-import name="DEFNE QR Menu" hint-size="100%,100%"></dc-import>
+    </div>
+  </x-import>
+</div>
+
+</x-dc>
+</body>
+</html>

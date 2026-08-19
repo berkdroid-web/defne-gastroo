@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="omelette-print-source" content="v1787063074336330 DEFNE QR Menu.dc.html" />
+<title>DEFNE Gastro Pub — Menü (Yazdır)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<script src="./doc-page.js"></script>
+<style>
+  doc-page:not(:defined) { visibility: hidden; }
+  * { box-sizing: border-box; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  * { animation-delay: -99s !important; animation-duration: .001s !important; animation-iteration-count: 1 !important; animation-fill-mode: both !important; animation-play-state: running !important; transition-duration: 0s !important; }
+  body { margin: 0; -webkit-font-smoothing: antialiased; }
+  a { color: oklch(0.94 0.01 70); text-decoration: none; }
+</style>
+</helmet>
+
+<doc-page margin="0.6in" style="background:oklch(0.16 0.02 150);color:oklch(0.94 0.01 70);font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;">
+  <div style="text-align:center;margin-bottom:28px;">
+    <img src="uploads/defne logo siyah.png" alt="DEFNE" style="width:100px;filter:brightness(0) invert(1);" />
+    <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:oklch(0.85 0.01 60);margin-top:8px;">Gastro Pub</div>
+    <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:oklch(0.6 0.015 60);margin-top:6px;">Kokteyl · Meze · Yemek</div>
+  </div>
+
+  <div style="break-inside:avoid;margin-bottom:32px;">
+    <div style="font-family:'Playfair Display',serif;font-size:26px;">Bizim Spesiyelimiz</div>
+    <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:oklch(0.58 0.015 60);margin-top:4px;margin-bottom:14px;">Defne'nin İmza Seçkisi</div>
+    <sc-for list="{{ specialty }}" as="sig" hint-placeholder-count="6">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:8px 0;border-bottom:1px solid oklch(1 0 0 / .12);break-inside:avoid;">
+        <div style="min-width:0;">
+          <div style="font-size:15px;font-weight:600;">{{ sig.name }}</div>
+          <sc-if value="{{ sig.desc }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:12px;color:oklch(0.62 0.015 60);margin-top:2px;">{{ sig.desc }}</div>
+          </sc-if>
+        </div>
+        <div style="font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap;">{{ sig.price }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="5">
+    <div style="break-before:page;padding-top:8px;">
+      <div style="display:flex;align-items:baseline;gap:12px;">
+        <div style="font-family:'Playfair Display',serif;font-size:13px;color:oklch(0.78 0.06 130);">{{ cat.num }}</div>
+        <div style="font-family:'Playfair Display',serif;font-size:26px;">{{ cat.title }}</div>
+      </div>
+      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:oklch(0.58 0.015 60);margin-top:4px;margin-bottom:16px;">{{ cat.tag }}</div>
+
+      <sc-for list="{{ cat.subcats }}" as="sub" hint-placeholder-count="2">
+        <div style="margin-top:20px;">
+          <sc-if value="{{ sub.name }}" hint-placeholder-val="{{ false }}">
+            <div style="font-family:'Playfair Display',serif;font-size:17px;color:oklch(0.85 0.02 60);margin-bottom:4px;">{{ sub.name }}</div>
+          </sc-if>
+          <sc-for list="{{ sub.groups }}" as="grp" hint-placeholder-count="2">
+            <sc-if value="{{ grp.name }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:oklch(0.72 0.06 130);margin:14px 0 4px;">{{ grp.name }}</div>
+            </sc-if>
+            <sc-for list="{{ grp.items }}" as="item" hint-placeholder-count="4">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:6px 0;border-bottom:1px solid oklch(1 0 0 / .08);break-inside:avoid;">
+                <div style="min-width:0;">
+                  <div style="font-size:14px;font-weight:600;">{{ item.name }}</div>
+                  <sc-if value="{{ item.desc }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size:11px;color:oklch(0.6 0.015 60);margin-top:2px;">{{ item.desc }}</div>
+                  </sc-if>
+                </div>
+                <div style="font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap;">{{ item.price }}</div>
+              </div>
+            </sc-for>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+  </sc-for>
+
+  <div style="break-before:page;padding-top:8px;">
+    <img src="uploads/defne logo siyah.png" alt="DEFNE" style="width:90px;filter:brightness(0) invert(1);margin-bottom:18px;" />
+    <div style="display:flex;flex-wrap:wrap;gap:28px;font-size:13px;color:oklch(0.72 0.015 60);">
+      <div>
+        <div style="color:oklch(0.94 0.01 70);margin-bottom:4px;">Konum</div>
+        Betül Han No:9 · Kadıköy, İstanbul
+      </div>
+      <div>
+        <div style="color:oklch(0.94 0.01 70);margin-bottom:4px;">Saatler</div>
+        Her gün 12:00 – 02:00
+      </div>
+      <div>
+        <div style="color:oklch(0.94 0.01 70);margin-bottom:4px;">Instagram</div>
+        @defnekadikoy
+      </div>
+    </div>
+    <div style="margin-top:24px;font-size:10px;color:oklch(0.5 0.01 60);letter-spacing:.04em;">
+      Fiyatlarımıza tüm vergiler dahildir. Alerjen bilgisi için lütfen ekibimizle iletişime geçin.
+    </div>
+
+    <div style="margin-top:36px;">
+      <div style="font-family:'Playfair Display',serif;font-size:16px;margin-bottom:10px;">KVKK Aydınlatma Metni</div>
+      <sc-for list="{{ kvkkParagraphs }}" as="p" hint-placeholder-count="4">
+        <div style="font-size:10px;color:oklch(0.68 0.01 60);line-height:1.6;margin-bottom:8px;">{{ p }}</div>
+      </sc-for>
+    </div>
+  </div>
+</doc-page>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.specialty = [
+      { name: 'White-House', desc: 'Jim Beam · Beyaz Rom · Vanilyalı Votka', price: '660 ₺' },
+      { name: 'Aperol Spritz', desc: 'Prosecco · Aperol · Soda', price: '660 ₺' },
+      { name: 'Defne Burger', desc: '130gr Dana · Kuru Et · Bacon · Cheddar', price: '880 ₺' },
+      { name: 'Lava Tiftik Taco', desc: '12 Saat Pişirilmiş Dana Tiftik Ragu · Jalepeno', price: '860 ₺' },
+      { name: 'Kuzu Kulağı', desc: 'Bickens Gin · Şeftali Likörü · Kuzu Kulağı', price: '660 ₺' },
+      { name: 'Lipstick', desc: 'Bickens Pink Gin · Chambord · Taze Çilek', price: '700 ₺' }
+    ];
+
+    this.categories = [
+      { id: 'kokteyller', num: '01', title: 'Kokteyller', tag: 'Kokteyller', subcats: [{ name: '', groups: [
+        { name: 'Diğer Defne Kokteylleri', items: [
+          { name: 'White-House', desc: 'Jim Beam · Beyaz Rom · Vanilyalı Votka', price: '660 ₺' },
+          { name: 'Valor', desc: 'Biber İnfüze Votka · Passoa · Portakal Suyu', price: '660 ₺' },
+          { name: 'Blade Runner', desc: 'Espolon Tekila · Rakı · Safari · Taze Kavun', price: '660 ₺' },
+          { name: 'Hope', desc: 'Bickens Gin · Safari · Elma Püresi', price: '660 ₺' },
+          { name: 'Negroni', desc: 'Cin · Campari · Kırmızı Vermut', price: '660 ₺' },
+          { name: 'Panther', desc: 'Rum · Grand Marnier · Frambuaz · Limon Suyu', price: '750 ₺' }
+        ]},
+        { name: 'Klasik Kokteyller', items: [
+          { name: 'Long Island Ice Tea', desc: 'Cin · Votka · Tekila · Rom · Triple Sec · Kola', price: '660 ₺' },
+          { name: 'Margarita', desc: 'Espolon Blanco Tekila · Triple Sec', price: '600 ₺' },
+          { name: 'Whiskey Sour', desc: 'Jim Beam Viski · Limon Suyu · Şeker Şurubu', price: '600 ₺' },
+          { name: 'Martini', desc: '', price: '540 ₺' },
+          { name: 'Pornstar Martini', desc: '', price: '660 ₺' },
+          { name: 'Pina Colada', desc: '', price: '600 ₺' },
+          { name: 'Campari Americano', desc: '', price: '660 ₺' },
+          { name: 'Campari Spritz', desc: '', price: '600 ₺' }
+        ]},
+        { name: 'Highball Kokteyller', items: [
+          { name: 'Jim Beam & Soda', desc: '', price: '380 ₺' },
+          { name: 'Apple Highball', desc: 'Jim Beam Apple · Tonik · Misket Limonu', price: '380 ₺' },
+          { name: 'Beam Tonik', desc: '', price: '380 ₺' },
+          { name: 'Honey Lemonade', desc: 'Jim Beam Honey · Limonata · Soda', price: '380 ₺' },
+          { name: 'Beam & Breeze', desc: 'Jim Beam Bourbon · Sprite · Taze Limon', price: '380 ₺' },
+          { name: 'Black Cherry & Kola', desc: '', price: '380 ₺' }
+        ]}
+      ]}]},
+      { id: 'yemekler', num: '02', title: 'Yemekler', tag: 'Ana Yemek · Burger · Makarna · Salata · Wrap · Vegan', subcats: [
+        { name: 'Ana Yemek', groups: [{ name: '', items: [
+          { name: 'Izgara Kasap Köfte', desc: 'Ispanaklı Patates Püresi', price: '650 ₺' },
+          { name: 'Frankfurter Tabağı', desc: 'Bacon · Coleslaw · Tartar', price: '650 ₺' },
+          { name: 'Tavuk Şinitzel', desc: '350gr · Ispanaklı Patates Püresi', price: '550 ₺' },
+          { name: 'Çoban Kavurma', desc: '150gr Dana Bonfile · Tereyağ · Soğan', price: '900 ₺' },
+          { name: 'Defneden Ciğer', desc: 'Dana Yaprak Ciğer · Taze Soğan', price: '700 ₺' }
+        ]}]},
+        { name: 'Burger', groups: [{ name: '', items: [
+          { name: 'Defne Burger', desc: '130gr Dana · Kuru Et · Bacon · Cheddar', price: '880 ₺' },
+          { name: 'Green Cyprus Burger', desc: '130gr Dana · Pesto · Izgara Helim', price: '910 ₺' },
+          { name: 'Red Hot Smoke Burger', desc: 'Acı Vişne Chipotle · Erzincan Tulum', price: '830 ₺' },
+          { name: 'Ragu Burger', desc: '12 Saat Pişirilmiş Dana Tiftik Ragu · Cheddar', price: '850 ₺' },
+          { name: 'Mini Burgerler', desc: '3 Adet Mini Burger Köftesi', price: '640 ₺' },
+          { name: 'Cheeseburger', desc: '130gr Dana · Cheddar', price: '590 ₺' }
+        ]}]},
+        { name: 'Makarna', groups: [{ name: '', items: [
+          { name: 'Domates Soslu Köfteli Spaghetti', desc: 'Kasap Köfte', price: '550 ₺' },
+          { name: 'Fettucini Alfredo Tavuklu', desc: 'Tavuk Bonfile · Mantar', price: '500 ₺' },
+          { name: 'Pesto Velvet Penne', desc: 'Pesto · Krema · Parmesan', price: '400 ₺' },
+          { name: 'Spaghetti Napolitan', desc: 'Napolitan Sos · Parmesan', price: '400 ₺' },
+          { name: 'Penne Arabiata', desc: 'Arabiata Sos · Siyah Zeytin', price: '450 ₺' }
+        ]}]},
+        { name: 'Salata', groups: [{ name: '', items: [
+          { name: 'Çıtır Tavuklu Salata', desc: 'Paneli Tavuk Bonfile · Akdeniz Yeşillikleri', price: '400 ₺' },
+          { name: 'Köfteli Salata', desc: 'Dana Kasap Köfte · Akdeniz Yeşillikleri', price: '475 ₺' },
+          { name: 'Ton Balıklı Salata', desc: 'Dardanel Ton Balığı · Akdeniz Yeşillikleri', price: '450 ₺' }
+        ]}]},
+        { name: 'Wrap', groups: [{ name: '', items: [
+          { name: 'Köfte Wrap', desc: 'Kasap Köfte · Soğan · Biber · Cheddar', price: '550 ₺' },
+          { name: 'Tavuk Wrap', desc: 'Julyen Tavuk · Soğan · Biber · Mısır', price: '450 ₺' }
+        ]}]},
+        { name: 'Vegan', groups: [{ name: '', items: [
+          { name: 'Vegan Wrap', desc: 'Mantar · Kabak · Sebze · Vegan Tortilla', price: '450 ₺' },
+          { name: 'Vegan Atıştırma Tabağı', desc: 'Sebze Nugget · Falafel · Sebze Börek', price: '500 ₺' },
+          { name: 'Vegan Burger', desc: 'Bezelye Proteini Köfte · Guacamole', price: '490 ₺' },
+          { name: 'Vegan Şinitzel', desc: 'Bezelye Proteini Şinitzel · Guacamole', price: '550 ₺' },
+          { name: 'Vegan Şinitzel Burger', desc: 'Paneli Bezelye Proteini Burger', price: '470 ₺' },
+          { name: 'Falafel Dürüm', desc: '6 Adet Falafel · Tahin Dip', price: '470 ₺' },
+          { name: 'Vegan Salata', desc: 'Pancar · Havuç · Falafel Topları', price: '420 ₺' },
+          { name: 'Defne Vegan Junk', desc: 'Tahin Dip · Sebzeli Nugget · Falafel', price: '500 ₺' }
+        ]}]}
+      ]},
+      { id: 'atistirmaliklar', num: '03', title: 'Atıştırmalıklar', tag: 'Ortaya · Rakı Sofrası', subcats: [
+        { name: 'Ortaya', groups: [{ name: '', items: [
+          { name: 'Defne Atıştırma Tabağı', desc: 'İsli Dana Sosis · Dana Köfte · Kajun Tavuk · Helim', price: '550 ₺' },
+          { name: 'Çıtır Kajun Tavuk Cheddar', desc: 'Panelenmiş Tavuk Bonfile · Cheddar Dip', price: '480 ₺' },
+          { name: 'Defne Smoke Dog', desc: 'İsli Dana Sosis · Cheddar · Relish', price: '500 ₺' },
+          { name: 'Gaucho Chicken Taco', desc: 'Tavuk Bonfile · Mini Tortilla · Mısır', price: '530 ₺' },
+          { name: 'Lava Tiftik Taco', desc: '12 Saat Pişirilmiş Dana Tiftik Ragu · Jalepeno', price: '860 ₺' },
+          { name: 'Parmak Patates', desc: '', price: '300 ₺' },
+          { name: 'Trüflü Parmesanlı Kaşık Patates', desc: 'Truf Yağı · Grana Padano', price: '380 ₺' },
+          { name: 'Defne Şarap Tabağı', desc: 'Kuru Et · Izgara Helim · Eski Kaşar · Kuru Meyve', price: '800 ₺' }
+        ]}]},
+        { name: 'Rakı Sofrası', groups: [{ name: '', items: [
+          { name: 'Defne Meze', desc: 'Kuru Domates · Kırık Zeytin · Tulum Peyniri', price: '300 ₺' },
+          { name: 'Roka Salata Peynirli', desc: 'Roka · Domates · Ezine Peyniri', price: '420 ₺' },
+          { name: 'Salatalık Havuç Söğüş', desc: '', price: '200 ₺' },
+          { name: 'Ezine Peyniri', desc: '', price: '250 ₺' },
+          { name: 'Eski Kaşar', desc: '', price: '350 ₺' },
+          { name: 'Meyve', desc: 'Mevsim Meyveleri', price: '250 ₺' }
+        ]}]}
+      ]},
+      { id: 'bira', num: '04', title: 'Bira', tag: 'Fıçı · Şişe Biralar', subcats: [{ name: '', groups: [
+        { name: 'Fıçı Biralar', items: [
+          { name: 'Tuborg Gold', desc: '33cl · 50cl', price: '180 ₺ · 220 ₺' }, { name: 'Carlsberg', desc: '33cl · 50cl', price: '195 ₺ · 240 ₺' },
+          { name: 'Guinness', desc: '25cl · 50cl', price: '320 ₺ · 400 ₺' }, { name: 'Weihenstephan', desc: '33cl · 50cl', price: '320 ₺ · 400 ₺' },
+          { name: 'Blanc', desc: '25cl · 50cl', price: '230 ₺ · 290 ₺' }
+        ]},
+        { name: 'Yerli Şişe Biralar', items: [
+          { name: 'Tuborg Gold', desc: '50cl', price: '230 ₺' }, { name: 'Tuborg Filtresiz', desc: '50cl', price: '260 ₺' },
+          { name: 'Tuborg Smooth', desc: '33cl', price: '200 ₺' }, { name: 'Carlsberg', desc: '50cl', price: '240 ₺' },
+          { name: 'Carlsberg Luna', desc: '50cl', price: '300 ₺' }, { name: 'Carlsberg Elephant', desc: '50cl', price: '350 ₺' },
+          { name: 'Frederik India Pale Ale', desc: '33cl', price: '320 ₺' }, { name: 'Frederik Marzen Lager', desc: '33cl', price: '320 ₺' },
+          { name: 'Frederik Brown Ale', desc: '33cl', price: '320 ₺' }, { name: 'Frederik Wheat IPA', desc: '33cl', price: '320 ₺' },
+          { name: 'Frederik Yakima IPA', desc: '33cl', price: '320 ₺' }, { name: 'Frederik NEIPA', desc: '33cl', price: '320 ₺' },
+          { name: 'Frederik Tropic IPA', desc: '33cl', price: '320 ₺' }, { name: 'Frederik Local', desc: '33cl', price: '320 ₺' }
+        ]},
+        { name: 'İthal Şişe Biralar', items: [
+          { name: 'Desperados', desc: '33cl', price: '350 ₺' }, { name: 'Sol', desc: '33cl', price: '320 ₺' }, { name: 'Heineken', desc: '33cl', price: '350 ₺' }
+        ]}
+      ]}]},
+      { id: 'alkol', num: '05', title: 'Alkol', tag: 'Viski · Cin · Tekila · Votka · Rom · Konyak · Rakı', subcats: [
+        { name: 'Viski — Single Malt', groups: [{ name: '', items: [
+          { name: 'Glen Grant Arboralis', price: '440 ₺' }, { name: 'Glen Grant 10YO', price: '500 ₺' },
+          { name: 'Glen Grant 12YO', price: '590 ₺' }, { name: 'Glen Grant 15YO', price: '950 ₺' },
+          { name: 'Glen Grant 18YO', price: '1440 ₺' }, { name: 'Auchentoshan American Oak', price: '430 ₺' },
+          { name: 'Auchentoshan Three Wood', price: '770 ₺' }, { name: 'Auchentoshan 12YO', price: '625 ₺' },
+          { name: 'Auchentoshan 18YO', price: '1740 ₺' }, { name: 'Laphroaig 10YO', price: '745 ₺' },
+          { name: 'Bowmore 12YO', price: '790 ₺' }, { name: 'Bowmore 15YO', price: '1585 ₺' },
+          { name: 'Bowmore 18YO', price: '3155 ₺' }, { name: 'Ardmore Legacy', price: '545 ₺' },
+          { name: 'Lagavulin 12YO', price: '1875 ₺' }, { name: 'Talisker 10YO', price: '625 ₺' }
+        ]}]},
+        { name: 'Viski — Bourbon', groups: [{ name: '', items: [
+          { name: 'Jim Beam', price: '360 ₺' }, { name: 'Jim Beam Black', price: '420 ₺' },
+          { name: 'Jim Beam Apple', price: '360 ₺' }, { name: "Maker's Mark", price: '530 ₺' },
+          { name: 'Jim Beam Black Cherry', price: '300 ₺' }, { name: 'Knob Creek 9YO', price: '780 ₺' },
+          { name: 'Jim Beam Honey', price: '360 ₺' }, { name: 'Knob Creek Rye', price: '780 ₺' },
+          { name: 'Jim Beam Double Oak', price: '480 ₺' }, { name: 'Basil Hayden', price: '790 ₺' }
+        ]}]},
+        { name: 'Viski — Irish & Japanese', groups: [{ name: '', items: [
+          { name: 'Connemara', price: '550 ₺' }, { name: 'Dubliner', price: '325 ₺' }, { name: 'Jameson', price: '380 ₺' },
+          { name: 'Hibiki Japanese Harmony', price: '1970 ₺' }, { name: 'The Chita', price: '1200 ₺' }, { name: 'The Yamazaki', price: '1920 ₺' }
+        ]}]},
+        { name: 'Viski — Scotch', groups: [{ name: '', items: [
+          { name: 'JW Green Label', price: '735 ₺' }, { name: 'JW Double Black', price: '480 ₺' },
+          { name: 'JW Red Label', price: '330 ₺' }, { name: 'JW Blue Label', price: '2400 ₺' },
+          { name: 'JW 18YO', price: '805 ₺' }, { name: "Teacher's", price: '300 ₺' },
+          { name: 'JW Black Label', price: '420 ₺' }, { name: 'Dimple Golden Selection', price: '360 ₺' },
+          { name: 'JW Gold Label', price: '600 ₺' }
+        ]}]},
+        { name: 'Cin', groups: [{ name: '', items: [
+          { name: 'Roku Japanese Craft', price: '695 ₺' }, { name: 'Bulldog London Dry Gin', price: '480 ₺' },
+          { name: 'Sipsmith London Dry Gin', price: '780 ₺' }, { name: 'Larios London Dry Gin', price: '315 ₺' },
+          { name: 'Larios 12 Premium', price: '360 ₺' }, { name: 'Larios Rose', price: '360 ₺' },
+          { name: 'Bickens London Dry', price: '420 ₺' }, { name: 'Bickens Distilled Pink', price: '420 ₺' },
+          { name: 'Tanqueray No Ten', price: '540 ₺' }, { name: 'Tanqueray Sevilla', price: '480 ₺' }, { name: "Hendrick's", price: '650 ₺' }
+        ]}]},
+        { name: 'Tekila & Mezcal', groups: [{ name: '', items: [
+          { name: 'Espolon Blanco', price: '270 ₺' }, { name: 'Espolon Reposado', price: '290 ₺' },
+          { name: 'El Jimador', price: '200 ₺' }, { name: 'Patron', price: '1900 ₺' },
+          { name: 'Montelobos Espadin', price: '390 ₺' }, { name: 'Montelobos Ensamble', price: '480 ₺' }
+        ]}]},
+        { name: 'Votka, Rom & Konyak', groups: [{ name: '', items: [
+          { name: 'Finlandia', price: '335 ₺' }, { name: 'Finlandia Lime', price: '335 ₺' },
+          { name: 'Finlandia Redberry', price: '335 ₺' }, { name: 'Skyy', price: '325 ₺' },
+          { name: 'Haku', price: '800 ₺' }, { name: 'Smirnoff Red', price: '300 ₺' }, { name: 'Smirnoff North', price: '420 ₺' },
+          { name: 'Captain Morgan White', price: '480 ₺' }, { name: 'Captain Morgan Gold', price: '480 ₺' }, { name: 'Zacapa', price: '600 ₺' },
+          { name: 'Courvoisier VS', price: '720 ₺' }, { name: 'Courvoisier VSOP', price: '960 ₺' }, { name: 'Remy Martin', price: '890 ₺' }
+        ]}]},
+        { name: 'Vermut & Likör', groups: [{ name: '', items: [
+          { name: 'Campari', price: '540 ₺' }, { name: 'Cinzano Prosecco', price: '720 ₺' },
+          { name: 'Cinzano Vermouth Rosso', price: '480 ₺' }, { name: 'Cinzano Vermouth Blanco', price: '480 ₺' }, { name: 'Cinzano Vermouth Extra Dry', price: '480 ₺' },
+          { name: 'Grand Marnier', price: '635 ₺' }, { name: "Bailey's", price: '300 ₺' }, { name: 'Cointreau', price: '480 ₺' },
+          { name: 'Jagermeister', price: '400 ₺' }, { name: 'Disaronna', price: '360 ₺' }, { name: 'Chambord', price: '480 ₺' }
+        ]}]},
+        { name: 'Rakı', groups: [{ name: '', items: [
+          { name: 'Tekirdağ Rakısı Altın Seri', desc: 'Tek · Duble', price: '470 ₺ · 540 ₺' }
+        ]}]}
+      ]}
+    ];
+
+    this.kvkkParagraphs = [
+      '6698 Sayılı Kişisel Verilerin Korunması Kanunu Uyarınca Aydınlatma Metni',
+      'Veri Sorumlusu: DEFNE Gastro Pub (Betül Han No:9, Kadıköy, İstanbul)',
+      'Bu aydınlatma metni, 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında, dijital menümüzü kullanan misafirlerimizin kişisel verilerinin işlenmesine ilişkin usul ve esaslar hakkında bilgilendirme amacıyla hazırlanmıştır.',
+      'İşlenen Kişisel Veriler: Bu dijital menüyü kullanırken tarayıcı/cihaz bilgileri ve çerez verileri işlenebilir.',
+      'İşleme Amaçları: Hizmet kalitesinin artırılması, menü kullanım istatistiklerinin analiz edilmesi ve yasal yükümlülüklerin yerine getirilmesi.',
+      'Aktarım: Kişisel verileriniz, yasal zorunluluklar dışında üçüncü kişilerle paylaşılmaz.',
+      "Haklarınız: KVKK'nın 11. maddesi uyarınca kişisel verilerinizin işlenip işlenmediğini öğrenme, bilgi talep etme, düzeltme veya silinmesini isteme ve işlenmesine itiraz etme haklarına sahipsiniz."
+    ];
+  }
+
+  render() {}
+
+  renderVals() {
+    return { specialty: this.specialty, categories: this.categories, kvkkParagraphs: this.kvkkParagraphs };
+  }
+}
+
+</script>
+</body>
+</html>

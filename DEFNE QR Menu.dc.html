@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="supported-color-schemes" content="dark">
+<title>DEFNE Gastro Pub — Menü</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; -webkit-font-smoothing: antialiased; }
+  a { color: oklch(0.94 0.01 70); text-decoration: none; }
+  a:hover { color: oklch(0.72 0.06 130); }
+  html, body { color-scheme: dark; }
+  img { -webkit-user-drag: none; -webkit-touch-callout: none; user-select: none; touch-action: pan-y !important; }
+  button, .defne-scrollwrap { touch-action: pan-y !important; }
+  @keyframes defneHeroIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes defneChevron { 0%,100% { transform: translateY(0); opacity:.5; } 50% { transform: translateY(6px); opacity:1; } }
+  @keyframes defneFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes defneTicker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes defneLogoZoom { 0% { transform: scale(1); opacity: 1; } 55% { transform: scale(1); opacity: 1; } 100% { transform: scale(32); opacity: 0; } }
+  @keyframes defneLogoBgFade { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; } }
+  @keyframes defneSlideUp { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</helmet>
+
+<div style="background:oklch(0.16 0.02 150);color:oklch(0.94 0.01 70);font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;min-height:100vh;overflow-x:hidden;position:relative;">
+
+  <sc-if value="{{ showLogoIntro }}" hint-placeholder-val="{{ true }}">
+    <div style="position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;background:oklch(0.14 0.018 150);animation:defneLogoBgFade 1.1s ease-in both;pointer-events:none;">
+      <img src="uploads/defne logo siyah.png" alt="DEFNE" style="width:120px;filter:brightness(0) invert(1);animation:defneLogoZoom 1.1s cubic-bezier(.6,0,.9,.4) both;">
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showIntro }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:999;background:oklch(0.14 0.018 150);display:flex;flex-direction:column;align-items:center;justify-content:center;animation:defneFade .4s ease both;">
+      <button onClick="{{ dismissIntro }}" style="position:absolute;top:22px;right:22px;background:none;border:none;color:oklch(0.6 0.01 60);font-size:12px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:10px;">GEÇ</button>
+      <div style="text-align:center;padding:0 24px;">
+        <sc-if value="{{ introStepZero }}" hint-placeholder-val="{{ true }}">
+          <div style="font-size:13px;letter-spacing:.2em;color:oklch(0.65 0.02 130);margin-bottom:14px;text-transform:uppercase;">Bugün</div>
+          <div style="font-family:'Playfair Display',serif;font-size:clamp(40px,11vw,72px);">{{ todayNameTR }}</div>
+        </sc-if>
+        <sc-if value="{{ introStepOne }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:13px;letter-spacing:.2em;color:oklch(0.65 0.02 130);margin-bottom:14px;text-transform:uppercase;">Günün İkramı</div>
+          <div style="font-family:'Playfair Display',serif;font-size:clamp(34px,9vw,60px);">{{ campaignToday.name }}</div>
+          <div style="margin-top:14px;font-size:18px;color:oklch(0.94 0.01 70);">{{ campaignToday.price }}</div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <section style="position:relative;min-height:94vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;overflow:hidden;" data-screen-label="Hero">
+    <img src="uploads/_DSF8257-sm.jpg" alt="" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;touch-action:pan-y;">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg, oklch(0.14 0.018 150 / .55), oklch(0.14 0.018 150 / .35) 45%, oklch(0.14 0.018 150 / .92));"></div>
+    <div style="position:relative;z-index:2;text-align:center;animation:defneHeroIn .7s ease both;">
+      <img src="uploads/defne logo siyah.png" alt="DEFNE" style="width: clamp(180px, 60vw, 300px); filter: brightness(0) invert(1) drop-shadow(0 2px 18px oklch(0 0 0 / .5)); margin-bottom: 6px; height: auto">
+      <div style="font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:#ffffff;-webkit-text-fill-color:#ffffff;margin-top:8px;text-shadow:0 1px 12px rgba(0,0,0,.6);">Gastro Pub</div>
+      <div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#ffffff;-webkit-text-fill-color:#ffffff;margin-top:22px;text-shadow:0 1px 12px rgba(0,0,0,.6);">Kokteyl · Meze · Yemek</div>
+    </div>
+    <button onClick="{{ scrollToMenu }}" style="position:absolute;bottom:28px;left:50%;transform:translateX(-50%);background:none;border:none;color:oklch(0.7 0.02 60);cursor:pointer;padding:10px;animation:defneChevron 2.2s ease-in-out infinite;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"></path></svg>
+    </button>
+  </section>
+
+  <sc-if value="{{ campaignToday }}" hint-placeholder-val="{{ true }}">
+    <section id="section-campaign" style="position:relative;min-height:64vh;display:flex;align-items:flex-end;padding:48px 24px;overflow:hidden;" data-screen-label="Günün İkramı">
+      <img src="./dsf8252-sm.jpg" alt="" draggable="false" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;touch-action:pan-y;">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg, oklch(0.16 0.02 150 / .2), oklch(0.16 0.02 150 / .96));"></div>
+      <div style="position:relative;z-index:2;max-width:640px;margin:0 auto;width:100%;">
+        <div style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:oklch(0.72 0.06 130);margin-bottom:10px;">{{ todayNameTR }} · Günün İkramı</div>
+        <div style="font-family:'Playfair Display',serif;font-size:clamp(32px,7vw,52px);line-height:1.05;">{{ campaignToday.name }}</div>
+        <div style="display:flex;align-items:baseline;gap:16px;margin-top:16px;flex-wrap:wrap;">
+          <div style="font-size:20px;">{{ campaignToday.price }}</div>
+          <button onClick="{{ scrollToCampaignTarget }}" style="background:none;border:1px solid oklch(0.94 0.01 70 / .35);color:oklch(0.94 0.01 70);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:11px 18px;cursor:pointer;">{{ campaignToday.cta }} →</button>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <nav style="position:sticky;top:0;z-index:50;background:oklch(0.16 0.02 150 / .96);backdrop-filter:blur(6px);border-bottom:1px solid oklch(1 0 0 / .08);">
+    <div style="overflow:hidden;padding:10px 0;">
+      <div style="display:inline-block;white-space:nowrap;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:oklch(0.5 0.01 60);animation:defneTicker 32s linear infinite;padding-left:16px;">{{ tickerText }} &nbsp;&nbsp;·&nbsp;&nbsp; {{ tickerText }}</div>
+    </div>
+  </nav>
+
+  <main id="section-menu" style="max-width:720px;margin:0 auto;padding:0 20px 60px;">
+
+    <div style="padding:40px 0 8px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+        <sc-for list="{{ quickNav }}" as="qn" hint-placeholder-count="6">
+          <button onClick="{{ qn.onClick }}" style="border:none;cursor:pointer;padding:0;text-align:left;background:none;display:flex;flex-direction:column;">
+            <div class="defne-scrollwrap" style="position:relative;aspect-ratio:4/5;overflow:hidden;background:oklch(0.22 0.022 150);touch-action:pan-y;">
+              <sc-if value="{{ qn.img }}" hint-placeholder-val="{{ false }}">
+                <img src="{{ qn.img }}" alt="{{ qn.title }}" draggable="false" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;touch-action:pan-y;">
+              </sc-if>
+              <sc-if value="{{ qn.noImg }}" hint-placeholder-val="{{ false }}">
+                <image-slot id="{{ qn.slotId }}" shape="rect" placeholder="{{ qn.title }}" data-readonly></image-slot>
+              </sc-if>
+              <div style="position:absolute;inset:0;border:1px solid oklch(1 0 0 / .14);pointer-events:none;"></div>
+            </div>
+            <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:11px;letter-spacing:.1em;color:oklch(0.72 0.06 130);margin-top:12px;">No. {{ qn.num }}</div>
+            <div style="width:20px;height:1px;background:oklch(0.72 0.06 130);margin:8px 0;"></div>
+            <div style="font-family:'Playfair Display',serif;font-size:clamp(18px,2.2vw,22px);color:oklch(0.65 0.015 60);line-height:1.1;">{{ qn.title }}</div>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+
+    <section id="section-spesiyelimiz" data-cat-section="spesiyelimiz" style="padding:88px 0 8px;border-top:1px solid oklch(1 0 0 / .08);" data-screen-label="Bizim Spesiyelimiz">
+      <div style="display:flex;align-items:baseline;gap:14px;">
+        <div style="font-family:'Playfair Display',serif;font-size:clamp(30px,6vw,42px);">Bizim Spesiyelimiz</div>
+      </div>
+      <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:oklch(0.58 0.015 60);margin-top:6px;">Defne'nin İmza Seçkisi</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:28px;margin-top:32px;">
+        <sc-for list="{{ specialty }}" as="sig" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div class="defne-scrollwrap" style="width:100%;aspect-ratio:4/5;overflow:hidden;background:oklch(0.205 0.022 150);touch-action:pan-y;">
+              <sc-if value="{{ sig.img }}" hint-placeholder-val="{{ false }}">
+                <img src="./img8303-sm.jpg" alt="{{ sig.name }}" draggable="false" loading="lazy" style="width:100%;height:100%;object-fit:cover;touch-action:pan-y;">
+              </sc-if>
+              <sc-if value="{{ sig.noImg }}" hint-placeholder-val="{{ false }}">
+                <image-slot id="{{ sig.slotId }}" shape="rect" placeholder="{{ sig.name }}" data-readonly></image-slot>
+              </sc-if>
+            </div>
+            <div>
+              <div style="font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,27px);">{{ sig.name }}</div>
+              <div style="font-size:13px;color:oklch(0.65 0.015 60);margin-top:5px;">{{ sig.desc }}</div>
+              <div style="margin-top:9px;font-size:15px;font-variant-numeric:tabular-nums;">{{ sig.price }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="5">
+      <section id="section-{{ cat.id }}" data-cat-section="{{ cat.id }}" style="padding:88px 0 8px;border-top:1px solid oklch(1 0 0 / .08);" data-screen-label="{{ cat.title }}">
+        <div style="display:flex;align-items:baseline;gap:14px;">
+          <div style="font-family:'Playfair Display',serif;font-size:15px;color:oklch(0.72 0.06 130);">{{ cat.num }}</div>
+          <div style="font-family:'Playfair Display',serif;font-size:clamp(30px,6vw,42px);">{{ cat.title }}</div>
+        </div>
+        <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:oklch(0.58 0.015 60);margin-top:6px;">{{ cat.tag }}</div>
+
+        <sc-for list="{{ cat.subcats }}" as="sub" hint-placeholder-count="2">
+          <div style="margin-top:40px;">
+            <sc-if value="{{ sub.name }}" hint-placeholder-val="{{ false }}">
+              <div style="font-family:'Playfair Display',serif;font-size:20px;color:oklch(0.85 0.02 60);margin-bottom:6px;">{{ sub.name }}</div>
+            </sc-if>
+            <sc-for list="{{ sub.groups }}" as="grp" hint-placeholder-count="2">
+              <sc-if value="{{ grp.name }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:oklch(0.72 0.06 130);margin:22px 0 6px;">{{ grp.name }}</div>
+              </sc-if>
+              <sc-for list="{{ grp.items }}" as="item" hint-placeholder-count="4">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px solid oklch(1 0 0 / .07);">
+                  <div style="min-width:0;">
+                    <div style="font-size:16px;font-weight:600;">{{ item.name }}</div>
+                    <sc-if value="{{ item.desc }}" hint-placeholder-val="{{ false }}">
+                      <div style="font-size:13px;color:oklch(0.6 0.015 60);margin-top:3px;">{{ item.desc }}</div>
+                    </sc-if>
+                  </div>
+                  <div style="font-size:15px;font-variant-numeric:tabular-nums;white-space:nowrap;">{{ item.price }}</div>
+                </div>
+              </sc-for>
+            </sc-for>
+          </div>
+        </sc-for>
+      </section>
+    </sc-for>
+  </main>
+
+  <footer style="border-top:1px solid oklch(1 0 0 / .1);padding:56px 20px 40px;">
+    <div style="max-width:720px;margin:0 auto;">
+      
+      <img src="uploads/defne logo siyah.png" alt="DEFNE" style="width:120px;filter:brightness(0) invert(1);margin-bottom:20px;">
+      <div style="display:flex;flex-wrap:wrap;gap:32px;font-size:14px;color:oklch(0.72 0.015 60);">
+        <div>
+          <div style="color:oklch(0.94 0.01 70);margin-bottom:6px;">Konum</div>
+          Betül Han No:9 · Kadıköy, İstanbul<br>
+          <a href="https://www.google.com/maps/place/Defne+Kad%C4%B1k%C3%B6y/@40.9900059,29.027728,17z" target="_blank">Google Maps'te Aç →</a>
+        </div>
+        <div>
+          <div style="color:oklch(0.94 0.01 70);margin-bottom:6px;">Saatler</div>
+          Her gün 12:00 – 02:00
+        </div>
+        <div>
+          <div style="color:oklch(0.94 0.01 70);margin-bottom:6px;">Instagram</div>
+          <a href="https://instagram.com/defnepub" target="_blank">@defnepub</a>
+        </div>
+      </div>
+      <div style="margin-top:36px;font-size:11px;color:oklch(0.5 0.01 60);letter-spacing:.05em;">
+        Fiyatlarımıza tüm vergiler dahildir. Alerjen bilgisi için lütfen ekibimizle iletişime geçin.
+      </div>
+      <div style="display:flex;gap:20px;margin-top:20px;flex-wrap:wrap;">
+        <button onClick="{{ openKvkk }}" style="background:none;border:none;color:oklch(0.55 0.015 60);font-size:11px;letter-spacing:.08em;text-decoration:underline;cursor:pointer;padding:0;">KVKK Aydınlatma Metni</button>
+        <button onClick="{{ openCookieManage }}" style="background:none;border:none;color:oklch(0.55 0.015 60);font-size:11px;letter-spacing:.08em;text-decoration:underline;cursor:pointer;padding:0;">Çerez Yönetimi</button>
+      </div>
+    </div>
+  </footer>
+
+  <sc-if value="{{ showCookieBanner }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:0;right:0;bottom:0;z-index:200;background:oklch(0.12 0.018 150 / .98);backdrop-filter:blur(8px);border-top:1px solid oklch(1 0 0 / .12);padding:20px 20px 24px;animation:defneSlideUp .4s ease both;">
+      <div style="max-width:720px;margin:0 auto;display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+        <div style="flex:1;min-width:220px;font-size:13px;color:oklch(0.85 0.01 60);line-height:1.5;">Deneyiminizi iyileştirmek için bu menüde çerezler kullanıyoruz.</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button onClick="{{ openCookieManage }}" style="background:none;border:1px solid oklch(1 0 0 / .3);color:oklch(0.94 0.01 70);font-size:12px;letter-spacing:.06em;padding:10px 16px;cursor:pointer;">Yönetim</button>
+          <button onClick="{{ rejectCookies }}" style="background:none;border:1px solid oklch(1 0 0 / .3);color:oklch(0.94 0.01 70);font-size:12px;letter-spacing:.06em;padding:10px 16px;cursor:pointer;">Reddet</button>
+          <button onClick="{{ acceptAllCookies }}" style="background:oklch(0.72 0.06 130);border:none;color:oklch(0.14 0.02 150);font-size:12px;letter-spacing:.06em;padding:10px 18px;cursor:pointer;">Tümünü Kabul Et</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showCookieManage }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:300;background:oklch(0.1 0.01 150 / .7);display:flex;align-items:center;justify-content:center;padding:20px;">
+      <div style="background:oklch(0.18 0.02 150);border:1px solid oklch(1 0 0 / .12);max-width:480px;width:100%;padding:32px;max-height:85vh;overflow-y:auto;">
+        <div style="font-family:'Playfair Display',serif;font-size:24px;margin-bottom:18px;">Çerez Yönetimi</div>
+        <div style="border-top:1px solid oklch(1 0 0 / .1);padding:16px 0;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;">
+            <div style="font-size:14px;font-weight:600;">Zorunlu Çerezler</div>
+            <div style="font-size:11px;color:oklch(0.55 0.015 60);text-transform:uppercase;">Her Zaman Açık</div>
+          </div>
+          <div style="font-size:12px;color:oklch(0.6 0.015 60);margin-top:6px;">Sitenin çalışması için gereklidir, kapatılamaz.</div>
+        </div>
+        <div style="border-top:1px solid oklch(1 0 0 / .1);padding:16px 0;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;">
+            <div style="font-size:14px;font-weight:600;">Analitik Çerezler</div>
+            <button onClick="{{ toggleAnalytics }}" style="{{ analyticsToggleStyle }}"><span style="{{ analyticsKnobStyle }}"></span></button>
+          </div>
+          <div style="font-size:12px;color:oklch(0.6 0.015 60);margin-top:6px;">Ziyaretçi istatistiklerini anlamamıza yardımcı olur.</div>
+        </div>
+        <div style="border-top:1px solid oklch(1 0 0 / .1);border-bottom:1px solid oklch(1 0 0 / .1);padding:16px 0;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;">
+            <div style="font-size:14px;font-weight:600;">Pazarlama Çerezleri</div>
+            <button onClick="{{ toggleMarketing }}" style="{{ marketingToggleStyle }}"><span style="{{ marketingKnobStyle }}"></span></button>
+          </div>
+          <div style="font-size:12px;color:oklch(0.6 0.015 60);margin-top:6px;">Kişiselleştirilmiş içerik ve teklifler için kullanılır.</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:24px;justify-content:flex-end;">
+          <button onClick="{{ closeModals }}" style="background:none;border:1px solid oklch(1 0 0 / .3);color:oklch(0.94 0.01 70);font-size:12px;letter-spacing:.06em;padding:10px 16px;cursor:pointer;">Kapat</button>
+          <button onClick="{{ savePrefs }}" style="background:oklch(0.72 0.06 130);border:none;color:oklch(0.14 0.02 150);font-size:12px;letter-spacing:.06em;padding:10px 18px;cursor:pointer;">Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showKvkk }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:300;background:oklch(0.1 0.01 150 / .7);display:flex;align-items:center;justify-content:center;padding:20px;">
+      <div style="background:oklch(0.18 0.02 150);border:1px solid oklch(1 0 0 / .12);max-width:560px;width:100%;padding:32px;max-height:85vh;overflow-y:auto;">
+        <div style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:16px;">KVKK Aydınlatma Metni</div>
+        <sc-for list="{{ kvkkParagraphs }}" as="p" hint-placeholder-count="7">
+          <div style="font-size:13px;color:oklch(0.78 0.01 60);line-height:1.65;margin-bottom:14px;">{{ p }}</div>
+        </sc-for>
+        <div style="display:flex;justify-content:flex-end;margin-top:10px;">
+          <button onClick="{{ closeModals }}" style="background:oklch(0.72 0.06 130);border:none;color:oklch(0.14 0.02 150);font-size:12px;letter-spacing:.06em;padding:10px 18px;cursor:pointer;">Kapat</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showLogoIntro: true, showIntro: false, introStepOne: false, todayNameTR: '', campaignToday: null, activeCat: 'spesiyelimiz',
+      showCookieBanner: false, showCookieManage: false, showKvkk: false, cookiePrefs: { analytics: false, marketing: false }
+    };
+
+    this.kvkkParagraphs = [
+      '6698 Sayılı Kişisel Verilerin Korunması Kanunu Uyarınca Aydınlatma Metni',
+      'Veri Sorumlusu: DEFNE Gastro Pub (Betül Han No:9, Kadıköy, İstanbul)',
+      'Bu aydınlatma metni, 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında, dijital menümüzü kullanan misafirlerimizin kişisel verilerinin işlenmesine ilişkin usul ve esaslar hakkında bilgilendirme amacıyla hazırlanmıştır.',
+      'İşlenen Kişisel Veriler: Bu dijital menüyü kullanırken tarayıcı/cihaz bilgileri ve çerez verileri işlenebilir.',
+      'İşleme Amaçları: Hizmet kalitesinin artırılması, menü kullanım istatistiklerinin analiz edilmesi ve yasal yükümlülüklerin yerine getirilmesi.',
+      'Aktarım: Kişisel verileriniz, yasal zorunluluklar dışında üçüncü kişilerle paylaşılmaz.',
+      "Haklarınız: KVKK'nın 11. maddesi uyarınca kişisel verilerinizin işlenip işlenmediğini öğrenme, bilgi talep etme, düzeltme veya silinmesini isteme ve işlenmesine itiraz etme haklarına sahipsiniz. Taleplerinizi doğrudan işletmemize iletebilirsiniz."
+    ];
+
+    this.campaigns = {
+      'Pazartesi': { name: "Teacher's", price: '240 ₺', targetId: 'alkol', cta: 'Alkolleri Keşfet' },
+      'Salı': { name: "Maker's Mark", price: '420 ₺', targetId: 'alkol', cta: 'Alkolleri Keşfet' },
+      'Çarşamba': { name: 'Bickens Gin', price: '340 ₺', targetId: 'alkol', cta: 'Alkolleri Keşfet' },
+      'Perşembe': { name: 'Jim Beam', price: '290 ₺', targetId: 'alkol', cta: 'Alkolleri Keşfet' },
+      'Cuma': { name: 'Jim Beam Whiskey Sour', price: '480 ₺', targetId: 'kokteyller', cta: 'Kokteylleri Keşfet' },
+      'Cumartesi': { name: 'Espolon Paloma', price: '530 ₺', targetId: 'kokteyller', cta: 'Kokteylleri Keşfet' },
+      'Pazar': { name: 'Aperol Spritz', price: '530 ₺', targetId: 'kokteyller', cta: 'Kokteylleri Keşfet' }
+    };
+
+    this.specialty = [
+      { name: 'White-House', desc: 'Jim Beam · Beyaz Rom · Vanilyalı Votka', price: '660 ₺', noImg: true, slotId: 'sig-espresso' },
+      { name: 'Aperol Spritz', desc: 'Prosecco · Aperol · Soda', price: '660 ₺', noImg: true, slotId: 'sig-aperol' },
+      { name: 'Defne Burger', desc: '130gr Dana · Kuru Et · Bacon · Cheddar', price: '880 ₺', noImg: true, slotId: 'sig-burger' },
+      { name: 'Lava Tiftik Taco', desc: '12 Saat Pişirilmiş Dana Tiftik Ragu · Jalepeno', price: '860 ₺', noImg: true, slotId: 'sig-sarap' },
+      { name: 'Kuzu Kulağı', desc: 'Bickens Gin · Şeftali Likörü · Kuzu Kulağı', price: '660 ₺', noImg: true, slotId: 'sig-kuzukulagi' },
+      { name: 'Lipstick', desc: 'Bickens Pink Gin · Chambord · Taze Çilek', price: '700 ₺', noImg: true, slotId: 'sig-lipstick' }
+    ];
+
+    this.categories = [
+      { id: 'kokteyller', num: '01', title: 'Kokteyller', tag: 'Kokteyller', subcats: [{ name: '', groups: [
+        { name: 'Diğer Defne Kokteylleri', items: [
+          { name: 'White-House', desc: 'Jim Beam · Beyaz Rom · Vanilyalı Votka', price: '660 ₺' },
+          { name: 'Valor', desc: 'Biber İnfüze Votka · Passoa · Portakal Suyu', price: '660 ₺' },
+          { name: 'Blade Runner', desc: 'Espolon Tekila · Rakı · Safari · Taze Kavun', price: '660 ₺' },
+          { name: 'Hope', desc: 'Bickens Gin · Safari · Elma Püresi', price: '660 ₺' },
+          { name: 'Negroni', desc: 'Cin · Campari · Kırmızı Vermut', price: '660 ₺' },
+          { name: 'Panther', desc: 'Rum · Grand Marnier · Frambuaz · Limon Suyu', price: '750 ₺' }
+        ]},
+        { name: 'Klasik Kokteyller', items: [
+          { name: 'Long Island Ice Tea', desc: 'Cin · Votka · Tekila · Rom · Triple Sec · Kola', price: '660 ₺' },
+          { name: 'Margarita', desc: 'Espolon Blanco Tekila · Triple Sec', price: '600 ₺' },
+          { name: 'Whiskey Sour', desc: 'Jim Beam Viski · Limon Suyu · Şeker Şurubu', price: '600 ₺' },
+          { name: 'Martini', desc: '', price: '540 ₺' },
+          { name: 'Pornstar Martini', desc: '', price: '660 ₺' },
+          { name: 'Pina Colada', desc: '', price: '600 ₺' },
+          { name: 'Campari Americano', desc: '', price: '660 ₺' },
+          { name: 'Campari Spritz', desc: '', price: '600 ₺' }
+        ]},
+        { name: 'Highball Kokteyller', items: [
+          { name: 'Jim Beam & Soda', desc: '', price: '380 ₺' },
+          { name: 'Apple Highball', desc: 'Jim Beam Apple · Tonik · Misket Limonu', price: '380 ₺' },
+          { name: 'Beam Tonik', desc: '', price: '380 ₺' },
+          { name: 'Honey Lemonade', desc: 'Jim Beam Honey · Limonata · Soda', price: '380 ₺' },
+          { name: 'Beam & Breeze', desc: 'Jim Beam Bourbon · Sprite · Taze Limon', price: '380 ₺' },
+          { name: 'Black Cherry & Kola', desc: '', price: '380 ₺' }
+        ]}
+      ]}]},
+      { id: 'yemekler', num: '02', title: 'Yemekler', tag: 'Ana Yemek · Burger · Makarna · Salata · Wrap · Vegan', subcats: [
+        { name: 'Ana Yemek', groups: [{ name: '', items: [
+          { name: 'Izgara Kasap Köfte', desc: 'Ispanaklı Patates Püresi', price: '650 ₺' },
+          { name: 'Frankfurter Tabağı', desc: 'Bacon · Coleslaw · Tartar', price: '650 ₺' },
+          { name: 'Tavuk Şinitzel', desc: '350gr · Ispanaklı Patates Püresi', price: '550 ₺' },
+          { name: 'Çoban Kavurma', desc: '150gr Dana Bonfile · Tereyağ · Soğan', price: '900 ₺' },
+          { name: 'Defneden Ciğer', desc: 'Dana Yaprak Ciğer · Taze Soğan', price: '700 ₺' }
+        ]}]},
+        { name: 'Burger', groups: [{ name: '', items: [
+          { name: 'Defne Burger', desc: '130gr Dana · Kuru Et · Bacon · Cheddar', price: '880 ₺' },
+          { name: 'Green Cyprus Burger', desc: '130gr Dana · Pesto · Izgara Helim', price: '910 ₺' },
+          { name: 'Red Hot Smoke Burger', desc: 'Acı Vişne Chipotle · Erzincan Tulum', price: '830 ₺' },
+          { name: 'Ragu Burger', desc: '12 Saat Pişirilmiş Dana Tiftik Ragu · Cheddar', price: '850 ₺' },
+          { name: 'Mini Burgerler', desc: '3 Adet Mini Burger Köftesi', price: '640 ₺' },
+          { name: 'Cheeseburger', desc: '130gr Dana · Cheddar', price: '590 ₺' }
+        ]}]},
+        { name: 'Makarna', groups: [{ name: '', items: [
+          { name: 'Domates Soslu Köfteli Spaghetti', desc: 'Kasap Köfte', price: '550 ₺' },
+          { name: 'Fettucini Alfredo Tavuklu', desc: 'Tavuk Bonfile · Mantar', price: '500 ₺' },
+          { name: 'Pesto Velvet Penne', desc: 'Pesto · Krema · Parmesan', price: '400 ₺' },
+          { name: 'Spaghetti Napolitan', desc: 'Napolitan Sos · Parmesan', price: '400 ₺' },
+          { name: 'Penne Arabiata', desc: 'Arabiata Sos · Siyah Zeytin', price: '450 ₺' }
+        ]}]},
+        { name: 'Salata', groups: [{ name: '', items: [
+          { name: 'Çıtır Tavuklu Salata', desc: 'Paneli Tavuk Bonfile · Akdeniz Yeşillikleri', price: '400 ₺' },
+          { name: 'Köfteli Salata', desc: 'Dana Kasap Köfte · Akdeniz Yeşillikleri', price: '475 ₺' },
+          { name: 'Ton Balıklı Salata', desc: 'Dardanel Ton Balığı · Akdeniz Yeşillikleri', price: '450 ₺' }
+        ]}]},
+        { name: 'Wrap', groups: [{ name: '', items: [
+          { name: 'Köfte Wrap', desc: 'Kasap Köfte · Soğan · Biber · Cheddar', price: '550 ₺' },
+          { name: 'Tavuk Wrap', desc: 'Julyen Tavuk · Soğan · Biber · Mısır', price: '450 ₺' }
+        ]}]},
+        { name: 'Vegan', groups: [{ name: '', items: [
+          { name: 'Vegan Wrap', desc: 'Mantar · Kabak · Sebze · Vegan Tortilla', price: '450 ₺' },
+          { name: 'Vegan Atıştırma Tabağı', desc: 'Sebze Nugget · Falafel · Sebze Börek', price: '500 ₺' },
+          { name: 'Vegan Burger', desc: 'Bezelye Proteini Köfte · Guacamole', price: '490 ₺' },
+          { name: 'Vegan Şinitzel', desc: 'Bezelye Proteini Şinitzel · Guacamole', price: '550 ₺' },
+          { name: 'Vegan Şinitzel Burger', desc: 'Paneli Bezelye Proteini Burger', price: '470 ₺' },
+          { name: 'Falafel Dürüm', desc: '6 Adet Falafel · Tahin Dip', price: '470 ₺' },
+          { name: 'Vegan Salata', desc: 'Pancar · Havuç · Falafel Topları', price: '420 ₺' },
+          { name: 'Defne Vegan Junk', desc: 'Tahin Dip · Sebzeli Nugget · Falafel', price: '500 ₺' }
+        ]}]}
+      ]},
+      { id: 'atistirmaliklar', num: '03', title: 'Atıştırmalıklar', tag: 'Ortaya · Rakı Sofrası', subcats: [
+        { name: 'Ortaya', groups: [{ name: '', items: [
+          { name: 'Defne Atıştırma Tabağı', desc: 'İsli Dana Sosis · Dana Köfte · Kajun Tavuk · Helim', price: '550 ₺' },
+          { name: 'Çıtır Kajun Tavuk Cheddar', desc: 'Panelenmiş Tavuk Bonfile · Cheddar Dip', price: '480 ₺' },
+          { name: 'Defne Smoke Dog', desc: 'İsli Dana Sosis · Cheddar · Relish', price: '500 ₺' },
+          { name: 'Gaucho Chicken Taco', desc: 'Tavuk Bonfile · Mini Tortilla · Mısır', price: '530 ₺' },
+          { name: 'Lava Tiftik Taco', desc: '12 Saat Pişirilmiş Dana Tiftik Ragu · Jalepeno', price: '860 ₺' },
+          { name: 'Parmak Patates', desc: '', price: '300 ₺' },
+          { name: 'Trüflü Parmesanlı Kaşık Patates', desc: 'Truf Yağı · Grana Padano', price: '380 ₺' },
+          { name: 'Defne Şarap Tabağı', desc: 'Kuru Et · Izgara Helim · Eski Kaşar · Kuru Meyve', price: '800 ₺' }
+        ]}]},
+        { name: 'Rakı Sofrası', groups: [{ name: '', items: [
+          { name: 'Defne Meze', desc: 'Kuru Domates · Kırık Zeytin · Tulum Peyniri', price: '300 ₺' },
+          { name: 'Roka Salata Peynirli', desc: 'Roka · Domates · Ezine Peyniri', price: '420 ₺' },
+          { name: 'Salatalık Havuç Söğüş', desc: '', price: '200 ₺' },
+          { name: 'Ezine Peyniri', desc: '', price: '250 ₺' },
+          { name: 'Eski Kaşar', desc: '', price: '350 ₺' },
+          { name: 'Meyve', desc: 'Mevsim Meyveleri', price: '250 ₺' }
+        ]}]}
+      ]},
+      { id: 'bira', num: '04', title: 'Bira', tag: 'Fıçı · Şişe Biralar', subcats: [{ name: '', groups: [
+        { name: 'Fıçı Biralar', items: [
+          { name: 'Tuborg Gold', desc: '33cl · 50cl', price: '180 ₺ · 220 ₺' }, { name: 'Carlsberg', desc: '33cl · 50cl', price: '195 ₺ · 240 ₺' },
+          { name: 'Guinness', desc: '25cl · 50cl', price: '320 ₺ · 400 ₺' }, { name: 'Weihenstephan', desc: '33cl · 50cl', price: '320 ₺ · 400 ₺' },
+          { name: 'Blanc', desc: '25cl · 50cl', price: '230 ₺ · 290 ₺' }
+        ]},
+        { name: 'Yerli Şişe Biralar', items: [
+          { name: 'Tuborg Gold', desc: '50cl', price: '230 ₺' }, { name: 'Tuborg Filtresiz', desc: '50cl', price: '260 ₺' },
+          { name: 'Tuborg Smooth', desc: '33cl', price: '200 ₺' }, { name: 'Carlsberg', desc: '50cl', price: '240 ₺' },
+          { name: 'Carlsberg Luna', desc: '50cl', price: '300 ₺' }, { name: 'Carlsberg Elephant', desc: '50cl', price: '350 ₺' },
+          { name: 'Frederik India Pale Ale', desc: '33cl', price: '320 ₺' }, { name: 'Frederik Marzen Lager', desc: '33cl', price: '320 ₺' },
+          { name: 'Frederik Brown Ale', desc: '33cl', price: '320 ₺' }, { name: 'Frederik Wheat IPA', desc: '33cl', price: '320 ₺' },
+          { name: 'Frederik Yakima IPA', desc: '33cl', price: '320 ₺' }, { name: 'Frederik NEIPA', desc: '33cl', price: '320 ₺' },
+          { name: 'Frederik Tropic IPA', desc: '33cl', price: '320 ₺' }, { name: 'Frederik Local', desc: '33cl', price: '320 ₺' }
+        ]},
+        { name: 'İthal Şişe Biralar', items: [
+          { name: 'Desperados', desc: '33cl', price: '350 ₺' }, { name: 'Sol', desc: '33cl', price: '320 ₺' }, { name: 'Heineken', desc: '33cl', price: '350 ₺' }
+        ]}
+      ]}]},
+      { id: 'alkol', num: '05', title: 'Alkol', tag: 'Viski · Cin · Tekila · Votka · Rom · Konyak · Rakı', subcats: [
+        { name: 'Viski — Single Malt', groups: [{ name: '', items: [
+          { name: 'Glen Grant Arboralis', price: '440 ₺' }, { name: 'Glen Grant 10YO', price: '500 ₺' },
+          { name: 'Glen Grant 12YO', price: '590 ₺' }, { name: 'Glen Grant 15YO', price: '950 ₺' },
+          { name: 'Glen Grant 18YO', price: '1440 ₺' }, { name: 'Auchentoshan American Oak', price: '430 ₺' },
+          { name: 'Auchentoshan Three Wood', price: '770 ₺' }, { name: 'Auchentoshan 12YO', price: '625 ₺' },
+          { name: 'Auchentoshan 18YO', price: '1740 ₺' }, { name: 'Laphroaig 10YO', price: '745 ₺' },
+          { name: 'Bowmore 12YO', price: '790 ₺' }, { name: 'Bowmore 15YO', price: '1585 ₺' },
+          { name: 'Bowmore 18YO', price: '3155 ₺' }, { name: 'Ardmore Legacy', price: '545 ₺' },
+          { name: 'Lagavulin 12YO', price: '1875 ₺' }, { name: 'Talisker 10YO', price: '625 ₺' }
+        ]}]},
+        { name: 'Viski — Bourbon', groups: [{ name: '', items: [
+          { name: 'Jim Beam', price: '360 ₺' }, { name: 'Jim Beam Black', price: '420 ₺' },
+          { name: 'Jim Beam Apple', price: '360 ₺' }, { name: "Maker's Mark", price: '530 ₺' },
+          { name: 'Jim Beam Black Cherry', price: '300 ₺' }, { name: 'Knob Creek 9YO', price: '780 ₺' },
+          { name: 'Jim Beam Honey', price: '360 ₺' }, { name: 'Knob Creek Rye', price: '780 ₺' },
+          { name: 'Jim Beam Double Oak', price: '480 ₺' }, { name: 'Basil Hayden', price: '790 ₺' }
+        ]}]},
+        { name: 'Viski — Irish & Japanese', groups: [{ name: '', items: [
+          { name: 'Connemara', price: '550 ₺' }, { name: 'Dubliner', price: '325 ₺' }, { name: 'Jameson', price: '380 ₺' },
+          { name: 'Hibiki Japanese Harmony', price: '1970 ₺' }, { name: 'The Chita', price: '1200 ₺' }, { name: 'The Yamazaki', price: '1920 ₺' }
+        ]}]},
+        { name: 'Viski — Scotch', groups: [{ name: '', items: [
+          { name: 'JW Green Label', price: '735 ₺' }, { name: 'JW Double Black', price: '480 ₺' },
+          { name: 'JW Red Label', price: '330 ₺' }, { name: 'JW Blue Label', price: '2400 ₺' },
+          { name: 'JW 18YO', price: '805 ₺' }, { name: "Teacher's", price: '300 ₺' },
+          { name: 'JW Black Label', price: '420 ₺' }, { name: 'Dimple Golden Selection', price: '360 ₺' },
+          { name: 'JW Gold Label', price: '600 ₺' }
+        ]}]},
+        { name: 'Cin', groups: [{ name: '', items: [
+          { name: 'Roku Japanese Craft', price: '695 ₺' }, { name: 'Bulldog London Dry Gin', price: '480 ₺' },
+          { name: 'Sipsmith London Dry Gin', price: '780 ₺' }, { name: 'Larios London Dry Gin', price: '315 ₺' },
+          { name: 'Larios 12 Premium', price: '360 ₺' }, { name: 'Larios Rose', price: '360 ₺' },
+          { name: 'Bickens London Dry', price: '420 ₺' }, { name: 'Bickens Distilled Pink', price: '420 ₺' },
+          { name: 'Tanqueray No Ten', price: '540 ₺' }, { name: 'Tanqueray Sevilla', price: '480 ₺' }, { name: "Hendrick's", price: '650 ₺' }
+        ]}]},
+        { name: 'Tekila & Mezcal', groups: [{ name: '', items: [
+          { name: 'Espolon Blanco', price: '270 ₺' }, { name: 'Espolon Reposado', price: '290 ₺' },
+          { name: 'El Jimador', price: '200 ₺' }, { name: 'Patron', price: '1900 ₺' },
+          { name: 'Montelobos Espadin', price: '390 ₺' }, { name: 'Montelobos Ensamble', price: '480 ₺' }
+        ]}]},
+        { name: 'Votka, Rom & Konyak', groups: [{ name: '', items: [
+          { name: 'Finlandia', price: '335 ₺' }, { name: 'Finlandia Lime', price: '335 ₺' },
+          { name: 'Finlandia Redberry', price: '335 ₺' }, { name: 'Skyy', price: '325 ₺' },
+          { name: 'Haku', price: '800 ₺' }, { name: 'Smirnoff Red', price: '300 ₺' }, { name: 'Smirnoff North', price: '420 ₺' },
+          { name: 'Captain Morgan White', price: '480 ₺' }, { name: 'Captain Morgan Gold', price: '480 ₺' }, { name: 'Zacapa', price: '600 ₺' },
+          { name: 'Courvoisier VS', price: '720 ₺' }, { name: 'Courvoisier VSOP', price: '960 ₺' }, { name: 'Remy Martin', price: '890 ₺' }
+        ]}]},
+        { name: 'Vermut & Likör', groups: [{ name: '', items: [
+          { name: 'Campari', price: '540 ₺' }, { name: 'Cinzano Prosecco', price: '720 ₺' },
+          { name: 'Cinzano Vermouth Rosso', price: '480 ₺' }, { name: 'Cinzano Vermouth Blanco', price: '480 ₺' }, { name: 'Cinzano Vermouth Extra Dry', price: '480 ₺' },
+          { name: 'Grand Marnier', price: '635 ₺' }, { name: "Bailey's", price: '300 ₺' }, { name: 'Cointreau', price: '480 ₺' },
+          { name: 'Jagermeister', price: '400 ₺' }, { name: 'Disaronna', price: '360 ₺' }, { name: 'Chambord', price: '480 ₺' }
+        ]}]},
+        { name: 'Rakı', groups: [{ name: '', items: [
+          { name: 'Tekirdağ Rakısı Altın Seri', desc: 'Tek · Duble', price: '470 ₺ · 540 ₺' }
+        ]}]}
+      ]}
+    ];
+  }
+
+  componentDidMount() {
+    const dayMapEnToTr = { Sunday: 'Pazar', Monday: 'Pazartesi', Tuesday: 'Salı', Wednesday: 'Çarşamba', Thursday: 'Perşembe', Friday: 'Cuma', Saturday: 'Cumartesi' };
+    let dayEn = 'Monday';
+    try { dayEn = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Istanbul', weekday: 'long' }).format(new Date()); } catch (e) {}
+    const todayNameTR = dayMapEnToTr[dayEn] || 'Pazartesi';
+    const campaign = this.campaigns[todayNameTR] || null;
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const logoIntroDelay = reduced ? 0 : 1100;
+
+    setTimeout(() => this.setState({ showLogoIntro: false }), logoIntroDelay);
+
+    if (campaign && !reduced) {
+      setTimeout(() => {
+        this.setState({ showIntro: true, todayNameTR, campaignToday: campaign });
+        setTimeout(() => this.setState({ introStepOne: true }), 650);
+        setTimeout(() => this.dismissIntro(), 1650);
+      }, logoIntroDelay);
+    } else {
+      this.setState({ todayNameTR, campaignToday: campaign });
+    }
+
+    const consent = localStorage.getItem('defne_cookie_consent');
+    if (consent) {
+      try {
+        const parsed = JSON.parse(consent);
+        this.setState({ cookiePrefs: { analytics: !!parsed.analytics, marketing: !!parsed.marketing } });
+      } catch (e) {}
+    } else {
+      setTimeout(() => this.setState({ showCookieBanner: true }), 1400);
+    }
+
+    this._onScroll = () => {
+      const sections = Array.from(document.querySelectorAll('[data-cat-section]'));
+      let current = this.state.activeCat;
+      for (const el of sections) {
+        if (el.getBoundingClientRect().top - 70 <= 0) current = el.getAttribute('data-cat-section');
+      }
+      if (current !== this.state.activeCat) this.setState({ activeCat: current });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+  }
+
+  componentWillUnmount() {
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+  }
+
+  scrollToId(id, offset) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - (offset || 0);
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+
+  dismissIntro() {
+    this.setState({ showIntro: false });
+    this.scrollToId('section-campaign', 0);
+  }
+
+  openCookieManage() { this.setState({ showCookieManage: true, showCookieBanner: false, showKvkk: false }); }
+  openKvkk() { this.setState({ showKvkk: true, showCookieBanner: false, showCookieManage: false }); }
+  closeModals() { this.setState({ showCookieManage: false, showKvkk: false }); }
+
+  acceptAllCookies() {
+    const prefs = { analytics: true, marketing: true };
+    localStorage.setItem('defne_cookie_consent', JSON.stringify(prefs));
+    this.setState({ cookiePrefs: prefs, showCookieBanner: false, showCookieManage: false });
+  }
+
+  rejectCookies() {
+    const prefs = { analytics: false, marketing: false };
+    localStorage.setItem('defne_cookie_consent', JSON.stringify(prefs));
+    this.setState({ cookiePrefs: prefs, showCookieBanner: false, showCookieManage: false });
+  }
+
+  toggleAnalytics() { this.setState({ cookiePrefs: { ...this.state.cookiePrefs, analytics: !this.state.cookiePrefs.analytics } }); }
+  toggleMarketing() { this.setState({ cookiePrefs: { ...this.state.cookiePrefs, marketing: !this.state.cookiePrefs.marketing } }); }
+
+  savePrefs() {
+    localStorage.setItem('defne_cookie_consent', JSON.stringify(this.state.cookiePrefs));
+    this.setState({ showCookieManage: false, showCookieBanner: false });
+  }
+
+  render() {}
+
+  renderVals() {
+    const allNav = [{ id: 'spesiyelimiz', num: '', title: 'Spesiyelimiz', tag: "Defne'nin İmza Seçkisi" }, ...this.categories.map(c => ({ id: c.id, num: c.num, title: c.title, tag: c.tag }))];
+    const tickerText = allNav.filter(c => c.tag).map(c => c.tag).join('   ·   ');
+
+    const quickNav = [
+      { id: 'spesiyelimiz', title: 'Spesiyel', img: 'uploads/IMG_8265-sm.jpg', num: '01' },
+      { id: 'kokteyller', title: 'Kokteyller', img: 'uploads/IMG_8321-sm.jpg', num: '02' },
+      { id: 'yemekler', title: 'Yemekler', noImg: true, slotId: 'qn-yemekler', num: '03' },
+      { id: 'atistirmaliklar', title: 'Atıştırmalıklar', noImg: true, slotId: 'qn-atistirmaliklar', num: '04' },
+      { id: 'bira', title: 'Bira', noImg: true, slotId: 'qn-bira', num: '05' },
+      { id: 'alkol', title: 'Alkol', noImg: true, slotId: 'qn-alkol', num: '06' }
+    ].map(qn => ({ ...qn, onClick: () => this.scrollToId('section-' + qn.id, 58) }));
+
+    const campaignToday = this.state.campaignToday;
+    const prefs = this.state.cookiePrefs;
+    const knobOn = 'width:36px;height:20px;border-radius:0;border:1px solid oklch(0.72 0.06 130);background:oklch(0.72 0.06 130);cursor:pointer;padding:2px;display:flex;justify-content:flex-end;';
+    const knobOff = 'width:36px;height:20px;border-radius:0;border:1px solid oklch(1 0 0 / .3);background:none;cursor:pointer;padding:2px;display:flex;justify-content:flex-start;';
+    const dotStyle = 'display:block;width:14px;height:14px;background:oklch(0.14 0.02 150);';
+    const dotStyleOff = 'display:block;width:14px;height:14px;background:oklch(0.6 0.01 60);';
+
+    return {
+      showLogoIntro: this.state.showLogoIntro,
+      showIntro: this.state.showIntro,
+      introStepZero: !this.state.introStepOne,
+      introStepOne: this.state.introStepOne,
+      todayNameTR: this.state.todayNameTR,
+      campaignToday: campaignToday,
+      dismissIntro: () => this.dismissIntro(),
+      scrollToMenu: () => this.scrollToId('section-menu', 58),
+      scrollToCampaignTarget: () => campaignToday && this.scrollToId('section-' + campaignToday.targetId, 58),
+      tickerText,
+      quickNav,
+      categories: this.categories,
+      specialty: this.specialty,
+      showCookieBanner: this.state.showCookieBanner,
+      showCookieManage: this.state.showCookieManage,
+      showKvkk: this.state.showKvkk,
+      openCookieManage: () => this.openCookieManage(),
+      openKvkk: () => this.openKvkk(),
+      closeModals: () => this.closeModals(),
+      acceptAllCookies: () => this.acceptAllCookies(),
+      rejectCookies: () => this.rejectCookies(),
+      toggleAnalytics: () => this.toggleAnalytics(),
+      toggleMarketing: () => this.toggleMarketing(),
+      savePrefs: () => this.savePrefs(),
+      analyticsToggleStyle: prefs.analytics ? knobOn : knobOff,
+      analyticsKnobStyle: prefs.analytics ? dotStyle : dotStyleOff,
+      marketingToggleStyle: prefs.marketing ? knobOn : knobOff,
+      marketingKnobStyle: prefs.marketing ? dotStyle : dotStyleOff,
+      kvkkParagraphs: this.kvkkParagraphs
+    };
+  }
+}
+
+</script>
+</body>
+</html>
