@@ -1,0 +1,87 @@
+backend:
+  name: github
+  repo: berkdroid-web/defne-gastroo
+  branch: main
+
+# ÖNEMLİ: Bu backend tanımı henüz canlıda çalışmaz. GitHub Pages tek başına
+# Decap CMS'in GitHub girişini (OAuth) yürütemez — bunun için ayrı bir OAuth
+# proxy servisi kurulması gerekiyor (örn. bir Netlify sitesine bağlanıp onun
+# OAuth sağlayıcısını kullanmak, ya da kendi barındırdığınız bir proxy: bkz.
+# https://github.com/sterlingwes/netlify-cms-github-oauth-provider). Proxy
+# kurulduğunda buraya şu iki satır eklenmeli:
+#   base_url: https://<oauth-proxy-adresiniz>
+#   auth_endpoint: auth
+#
+# Yerelde, giriş yapmadan denemek için:
+#   npx decap-server
+# ve bu dosyanın en üstüne geçici olarak şunu ekleyin:
+#   local_backend: true
+
+# Not: media_folder kasıtlı olarak "uploads" (devasa orijinal fotoğrafların
+# bulunduğu klasör) yerine ayrı, küçük bir klasöre bağlandı. Bu koleksiyondaki
+# hiçbir alan görsel yüklemesi yapmıyor (fotoğraflar ayrı bir görsel-slot
+# sistemiyle yönetiliyor); "uploads" gibi devasa dosyaları olan bir klasöre
+# bağlamak Decap'in medya kütüphanesinin tüm klasörü taramaya çalışıp
+# çökmesine (Invalid string length) yol açıyordu.
+media_folder: "cms-uploads"
+public_folder: "/cms-uploads"
+
+collections:
+  - name: "menu"
+    label: "Menü"
+    files:
+      - name: "menu_data"
+        label: "Menü Verileri"
+        file: "data/menu.json"
+        fields:
+          - label: "Günün Kampanyaları"
+            name: "campaigns"
+            widget: "list"
+            summary: "{{fields.day}} — {{fields.name}}"
+            fields:
+              - { label: "Gün", name: "day", widget: "select", options: ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"] }
+              - { label: "Ürün Adı", name: "name", widget: "string" }
+              - { label: "Fiyat", name: "price", widget: "string", hint: "Örn: 340 ₺" }
+              - { label: "Yönlendirilecek Kategori ID", name: "targetId", widget: "string", hint: "Örn: alkol, kokteyller" }
+              - { label: "Buton Metni", name: "cta", widget: "string" }
+
+          - label: "Spesiyelimiz (İmza Seçki)"
+            name: "specialty"
+            widget: "list"
+            summary: "{{fields.name}} — {{fields.price}}"
+            fields:
+              - { label: "Ürün Adı", name: "name", widget: "string" }
+              - { label: "Açıklama", name: "desc", widget: "string", required: false }
+              - { label: "Fiyat", name: "price", widget: "string" }
+              - { label: "Görsel Slot ID", name: "slotId", widget: "string", required: false, hint: "Görsel yönetimi için teknik alan, değiştirmeyin" }
+              - { label: "Görsel Slotu Kullan", name: "noImg", widget: "boolean", default: true, required: false }
+
+          - label: "Kategoriler"
+            name: "categories"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "ID", name: "id", widget: "string", hint: "Teknik kimlik, örn: kokteyller" }
+              - { label: "Sıra No", name: "num", widget: "string" }
+              - { label: "Başlık", name: "title", widget: "string" }
+              - { label: "Etiket", name: "tag", widget: "string", required: false }
+              - label: "Alt Kategoriler"
+                name: "subcats"
+                widget: "list"
+                summary: "{{fields.name}}"
+                fields:
+                  - { label: "Alt Kategori Adı", name: "name", widget: "string", required: false }
+                  - label: "Gruplar"
+                    name: "groups"
+                    widget: "list"
+                    summary: "{{fields.name}}"
+                    fields:
+                      - { label: "Grup Adı", name: "name", widget: "string", required: false }
+                      - label: "Ürünler"
+                        name: "items"
+                        widget: "list"
+                        summary: "{{fields.name}} — {{fields.price}}"
+                        fields:
+                          - { label: "Ürün Adı", name: "name", widget: "string" }
+                          - { label: "Açıklama", name: "desc", widget: "string", required: false }
+                          - { label: "Fiyat", name: "price", widget: "string" }

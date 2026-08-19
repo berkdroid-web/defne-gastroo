@@ -273,7 +273,8 @@ class Component extends DCLogic {
     super(props);
     this.state = {
       showLogoIntro: true, showIntro: false, introStepOne: false, todayNameTR: '', campaignToday: null, activeCat: 'spesiyelimiz',
-      showCookieBanner: false, showCookieManage: false, showKvkk: false, cookiePrefs: { analytics: false, marketing: false }
+      showCookieBanner: false, showCookieManage: false, showKvkk: false, cookiePrefs: { analytics: false, marketing: false },
+      menuData: null
     };
 
     this.kvkkParagraphs = [
@@ -285,218 +286,42 @@ class Component extends DCLogic {
       'Aktarım: Kişisel verileriniz, yasal zorunluluklar dışında üçüncü kişilerle paylaşılmaz.',
       "Haklarınız: KVKK'nın 11. maddesi uyarınca kişisel verilerinizin işlenip işlenmediğini öğrenme, bilgi talep etme, düzeltme veya silinmesini isteme ve işlenmesine itiraz etme haklarına sahipsiniz. Taleplerinizi doğrudan işletmemize iletebilirsiniz."
     ];
-
-    this.campaigns = {
-      'Pazartesi': { name: "Teacher's", price: '240 ₺', targetId: 'alkol', cta: 'Alkolleri Keşfet' },
-      'Salı': { name: "Maker's Mark", price: '420 ₺', targetId: 'alkol', cta: 'Alkolleri Keşfet' },
-      'Çarşamba': { name: 'Bickens Gin', price: '340 ₺', targetId: 'alkol', cta: 'Alkolleri Keşfet' },
-      'Perşembe': { name: 'Jim Beam', price: '290 ₺', targetId: 'alkol', cta: 'Alkolleri Keşfet' },
-      'Cuma': { name: 'Jim Beam Whiskey Sour', price: '480 ₺', targetId: 'kokteyller', cta: 'Kokteylleri Keşfet' },
-      'Cumartesi': { name: 'Espolon Paloma', price: '530 ₺', targetId: 'kokteyller', cta: 'Kokteylleri Keşfet' },
-      'Pazar': { name: 'Aperol Spritz', price: '530 ₺', targetId: 'kokteyller', cta: 'Kokteylleri Keşfet' }
-    };
-
-    this.specialty = [
-      { name: 'White-House', desc: 'Jim Beam · Beyaz Rom · Vanilyalı Votka', price: '660 ₺', noImg: true, slotId: 'sig-espresso' },
-      { name: 'Aperol Spritz', desc: 'Prosecco · Aperol · Soda', price: '660 ₺', noImg: true, slotId: 'sig-aperol' },
-      { name: 'Defne Burger', desc: '130gr Dana · Kuru Et · Bacon · Cheddar', price: '880 ₺', noImg: true, slotId: 'sig-burger' },
-      { name: 'Lava Tiftik Taco', desc: '12 Saat Pişirilmiş Dana Tiftik Ragu · Jalepeno', price: '860 ₺', noImg: true, slotId: 'sig-sarap' },
-      { name: 'Kuzu Kulağı', desc: 'Bickens Gin · Şeftali Likörü · Kuzu Kulağı', price: '660 ₺', noImg: true, slotId: 'sig-kuzukulagi' },
-      { name: 'Lipstick', desc: 'Bickens Pink Gin · Chambord · Taze Çilek', price: '700 ₺', noImg: true, slotId: 'sig-lipstick' }
-    ];
-
-    this.categories = [
-      { id: 'kokteyller', num: '01', title: 'Kokteyller', tag: 'Kokteyller', subcats: [{ name: '', groups: [
-        { name: 'Diğer Defne Kokteylleri', items: [
-          { name: 'White-House', desc: 'Jim Beam · Beyaz Rom · Vanilyalı Votka', price: '660 ₺' },
-          { name: 'Valor', desc: 'Biber İnfüze Votka · Passoa · Portakal Suyu', price: '660 ₺' },
-          { name: 'Blade Runner', desc: 'Espolon Tekila · Rakı · Safari · Taze Kavun', price: '660 ₺' },
-          { name: 'Hope', desc: 'Bickens Gin · Safari · Elma Püresi', price: '660 ₺' },
-          { name: 'Negroni', desc: 'Cin · Campari · Kırmızı Vermut', price: '660 ₺' },
-          { name: 'Panther', desc: 'Rum · Grand Marnier · Frambuaz · Limon Suyu', price: '750 ₺' }
-        ]},
-        { name: 'Klasik Kokteyller', items: [
-          { name: 'Long Island Ice Tea', desc: 'Cin · Votka · Tekila · Rom · Triple Sec · Kola', price: '660 ₺' },
-          { name: 'Margarita', desc: 'Espolon Blanco Tekila · Triple Sec', price: '600 ₺' },
-          { name: 'Whiskey Sour', desc: 'Jim Beam Viski · Limon Suyu · Şeker Şurubu', price: '600 ₺' },
-          { name: 'Martini', desc: '', price: '540 ₺' },
-          { name: 'Pornstar Martini', desc: '', price: '660 ₺' },
-          { name: 'Pina Colada', desc: '', price: '600 ₺' },
-          { name: 'Campari Americano', desc: '', price: '660 ₺' },
-          { name: 'Campari Spritz', desc: '', price: '600 ₺' }
-        ]},
-        { name: 'Highball Kokteyller', items: [
-          { name: 'Jim Beam & Soda', desc: '', price: '380 ₺' },
-          { name: 'Apple Highball', desc: 'Jim Beam Apple · Tonik · Misket Limonu', price: '380 ₺' },
-          { name: 'Beam Tonik', desc: '', price: '380 ₺' },
-          { name: 'Honey Lemonade', desc: 'Jim Beam Honey · Limonata · Soda', price: '380 ₺' },
-          { name: 'Beam & Breeze', desc: 'Jim Beam Bourbon · Sprite · Taze Limon', price: '380 ₺' },
-          { name: 'Black Cherry & Kola', desc: '', price: '380 ₺' }
-        ]}
-      ]}]},
-      { id: 'yemekler', num: '02', title: 'Yemekler', tag: 'Ana Yemek · Burger · Makarna · Salata · Wrap · Vegan', subcats: [
-        { name: 'Ana Yemek', groups: [{ name: '', items: [
-          { name: 'Izgara Kasap Köfte', desc: 'Ispanaklı Patates Püresi', price: '650 ₺' },
-          { name: 'Frankfurter Tabağı', desc: 'Bacon · Coleslaw · Tartar', price: '650 ₺' },
-          { name: 'Tavuk Şinitzel', desc: '350gr · Ispanaklı Patates Püresi', price: '550 ₺' },
-          { name: 'Çoban Kavurma', desc: '150gr Dana Bonfile · Tereyağ · Soğan', price: '900 ₺' },
-          { name: 'Defneden Ciğer', desc: 'Dana Yaprak Ciğer · Taze Soğan', price: '700 ₺' }
-        ]}]},
-        { name: 'Burger', groups: [{ name: '', items: [
-          { name: 'Defne Burger', desc: '130gr Dana · Kuru Et · Bacon · Cheddar', price: '880 ₺' },
-          { name: 'Green Cyprus Burger', desc: '130gr Dana · Pesto · Izgara Helim', price: '910 ₺' },
-          { name: 'Red Hot Smoke Burger', desc: 'Acı Vişne Chipotle · Erzincan Tulum', price: '830 ₺' },
-          { name: 'Ragu Burger', desc: '12 Saat Pişirilmiş Dana Tiftik Ragu · Cheddar', price: '850 ₺' },
-          { name: 'Mini Burgerler', desc: '3 Adet Mini Burger Köftesi', price: '640 ₺' },
-          { name: 'Cheeseburger', desc: '130gr Dana · Cheddar', price: '590 ₺' }
-        ]}]},
-        { name: 'Makarna', groups: [{ name: '', items: [
-          { name: 'Domates Soslu Köfteli Spaghetti', desc: 'Kasap Köfte', price: '550 ₺' },
-          { name: 'Fettucini Alfredo Tavuklu', desc: 'Tavuk Bonfile · Mantar', price: '500 ₺' },
-          { name: 'Pesto Velvet Penne', desc: 'Pesto · Krema · Parmesan', price: '400 ₺' },
-          { name: 'Spaghetti Napolitan', desc: 'Napolitan Sos · Parmesan', price: '400 ₺' },
-          { name: 'Penne Arabiata', desc: 'Arabiata Sos · Siyah Zeytin', price: '450 ₺' }
-        ]}]},
-        { name: 'Salata', groups: [{ name: '', items: [
-          { name: 'Çıtır Tavuklu Salata', desc: 'Paneli Tavuk Bonfile · Akdeniz Yeşillikleri', price: '400 ₺' },
-          { name: 'Köfteli Salata', desc: 'Dana Kasap Köfte · Akdeniz Yeşillikleri', price: '475 ₺' },
-          { name: 'Ton Balıklı Salata', desc: 'Dardanel Ton Balığı · Akdeniz Yeşillikleri', price: '450 ₺' }
-        ]}]},
-        { name: 'Wrap', groups: [{ name: '', items: [
-          { name: 'Köfte Wrap', desc: 'Kasap Köfte · Soğan · Biber · Cheddar', price: '550 ₺' },
-          { name: 'Tavuk Wrap', desc: 'Julyen Tavuk · Soğan · Biber · Mısır', price: '450 ₺' }
-        ]}]},
-        { name: 'Vegan', groups: [{ name: '', items: [
-          { name: 'Vegan Wrap', desc: 'Mantar · Kabak · Sebze · Vegan Tortilla', price: '450 ₺' },
-          { name: 'Vegan Atıştırma Tabağı', desc: 'Sebze Nugget · Falafel · Sebze Börek', price: '500 ₺' },
-          { name: 'Vegan Burger', desc: 'Bezelye Proteini Köfte · Guacamole', price: '490 ₺' },
-          { name: 'Vegan Şinitzel', desc: 'Bezelye Proteini Şinitzel · Guacamole', price: '550 ₺' },
-          { name: 'Vegan Şinitzel Burger', desc: 'Paneli Bezelye Proteini Burger', price: '470 ₺' },
-          { name: 'Falafel Dürüm', desc: '6 Adet Falafel · Tahin Dip', price: '470 ₺' },
-          { name: 'Vegan Salata', desc: 'Pancar · Havuç · Falafel Topları', price: '420 ₺' },
-          { name: 'Defne Vegan Junk', desc: 'Tahin Dip · Sebzeli Nugget · Falafel', price: '500 ₺' }
-        ]}]}
-      ]},
-      { id: 'atistirmaliklar', num: '03', title: 'Atıştırmalıklar', tag: 'Ortaya · Rakı Sofrası', subcats: [
-        { name: 'Ortaya', groups: [{ name: '', items: [
-          { name: 'Defne Atıştırma Tabağı', desc: 'İsli Dana Sosis · Dana Köfte · Kajun Tavuk · Helim', price: '550 ₺' },
-          { name: 'Çıtır Kajun Tavuk Cheddar', desc: 'Panelenmiş Tavuk Bonfile · Cheddar Dip', price: '480 ₺' },
-          { name: 'Defne Smoke Dog', desc: 'İsli Dana Sosis · Cheddar · Relish', price: '500 ₺' },
-          { name: 'Gaucho Chicken Taco', desc: 'Tavuk Bonfile · Mini Tortilla · Mısır', price: '530 ₺' },
-          { name: 'Lava Tiftik Taco', desc: '12 Saat Pişirilmiş Dana Tiftik Ragu · Jalepeno', price: '860 ₺' },
-          { name: 'Parmak Patates', desc: '', price: '300 ₺' },
-          { name: 'Trüflü Parmesanlı Kaşık Patates', desc: 'Truf Yağı · Grana Padano', price: '380 ₺' },
-          { name: 'Defne Şarap Tabağı', desc: 'Kuru Et · Izgara Helim · Eski Kaşar · Kuru Meyve', price: '800 ₺' }
-        ]}]},
-        { name: 'Rakı Sofrası', groups: [{ name: '', items: [
-          { name: 'Defne Meze', desc: 'Kuru Domates · Kırık Zeytin · Tulum Peyniri', price: '300 ₺' },
-          { name: 'Roka Salata Peynirli', desc: 'Roka · Domates · Ezine Peyniri', price: '420 ₺' },
-          { name: 'Salatalık Havuç Söğüş', desc: '', price: '200 ₺' },
-          { name: 'Ezine Peyniri', desc: '', price: '250 ₺' },
-          { name: 'Eski Kaşar', desc: '', price: '350 ₺' },
-          { name: 'Meyve', desc: 'Mevsim Meyveleri', price: '250 ₺' }
-        ]}]}
-      ]},
-      { id: 'bira', num: '04', title: 'Bira', tag: 'Fıçı · Şişe Biralar', subcats: [{ name: '', groups: [
-        { name: 'Fıçı Biralar', items: [
-          { name: 'Tuborg Gold', desc: '33cl · 50cl', price: '180 ₺ · 220 ₺' }, { name: 'Carlsberg', desc: '33cl · 50cl', price: '195 ₺ · 240 ₺' },
-          { name: 'Guinness', desc: '25cl · 50cl', price: '320 ₺ · 400 ₺' }, { name: 'Weihenstephan', desc: '33cl · 50cl', price: '320 ₺ · 400 ₺' },
-          { name: 'Blanc', desc: '25cl · 50cl', price: '230 ₺ · 290 ₺' }
-        ]},
-        { name: 'Yerli Şişe Biralar', items: [
-          { name: 'Tuborg Gold', desc: '50cl', price: '230 ₺' }, { name: 'Tuborg Filtresiz', desc: '50cl', price: '260 ₺' },
-          { name: 'Tuborg Smooth', desc: '33cl', price: '200 ₺' }, { name: 'Carlsberg', desc: '50cl', price: '240 ₺' },
-          { name: 'Carlsberg Luna', desc: '50cl', price: '300 ₺' }, { name: 'Carlsberg Elephant', desc: '50cl', price: '350 ₺' },
-          { name: 'Frederik India Pale Ale', desc: '33cl', price: '320 ₺' }, { name: 'Frederik Marzen Lager', desc: '33cl', price: '320 ₺' },
-          { name: 'Frederik Brown Ale', desc: '33cl', price: '320 ₺' }, { name: 'Frederik Wheat IPA', desc: '33cl', price: '320 ₺' },
-          { name: 'Frederik Yakima IPA', desc: '33cl', price: '320 ₺' }, { name: 'Frederik NEIPA', desc: '33cl', price: '320 ₺' },
-          { name: 'Frederik Tropic IPA', desc: '33cl', price: '320 ₺' }, { name: 'Frederik Local', desc: '33cl', price: '320 ₺' }
-        ]},
-        { name: 'İthal Şişe Biralar', items: [
-          { name: 'Desperados', desc: '33cl', price: '350 ₺' }, { name: 'Sol', desc: '33cl', price: '320 ₺' }, { name: 'Heineken', desc: '33cl', price: '350 ₺' }
-        ]}
-      ]}]},
-      { id: 'alkol', num: '05', title: 'Alkol', tag: 'Viski · Cin · Tekila · Votka · Rom · Konyak · Rakı', subcats: [
-        { name: 'Viski — Single Malt', groups: [{ name: '', items: [
-          { name: 'Glen Grant Arboralis', price: '440 ₺' }, { name: 'Glen Grant 10YO', price: '500 ₺' },
-          { name: 'Glen Grant 12YO', price: '590 ₺' }, { name: 'Glen Grant 15YO', price: '950 ₺' },
-          { name: 'Glen Grant 18YO', price: '1440 ₺' }, { name: 'Auchentoshan American Oak', price: '430 ₺' },
-          { name: 'Auchentoshan Three Wood', price: '770 ₺' }, { name: 'Auchentoshan 12YO', price: '625 ₺' },
-          { name: 'Auchentoshan 18YO', price: '1740 ₺' }, { name: 'Laphroaig 10YO', price: '745 ₺' },
-          { name: 'Bowmore 12YO', price: '790 ₺' }, { name: 'Bowmore 15YO', price: '1585 ₺' },
-          { name: 'Bowmore 18YO', price: '3155 ₺' }, { name: 'Ardmore Legacy', price: '545 ₺' },
-          { name: 'Lagavulin 12YO', price: '1875 ₺' }, { name: 'Talisker 10YO', price: '625 ₺' }
-        ]}]},
-        { name: 'Viski — Bourbon', groups: [{ name: '', items: [
-          { name: 'Jim Beam', price: '360 ₺' }, { name: 'Jim Beam Black', price: '420 ₺' },
-          { name: 'Jim Beam Apple', price: '360 ₺' }, { name: "Maker's Mark", price: '530 ₺' },
-          { name: 'Jim Beam Black Cherry', price: '300 ₺' }, { name: 'Knob Creek 9YO', price: '780 ₺' },
-          { name: 'Jim Beam Honey', price: '360 ₺' }, { name: 'Knob Creek Rye', price: '780 ₺' },
-          { name: 'Jim Beam Double Oak', price: '480 ₺' }, { name: 'Basil Hayden', price: '790 ₺' }
-        ]}]},
-        { name: 'Viski — Irish & Japanese', groups: [{ name: '', items: [
-          { name: 'Connemara', price: '550 ₺' }, { name: 'Dubliner', price: '325 ₺' }, { name: 'Jameson', price: '380 ₺' },
-          { name: 'Hibiki Japanese Harmony', price: '1970 ₺' }, { name: 'The Chita', price: '1200 ₺' }, { name: 'The Yamazaki', price: '1920 ₺' }
-        ]}]},
-        { name: 'Viski — Scotch', groups: [{ name: '', items: [
-          { name: 'JW Green Label', price: '735 ₺' }, { name: 'JW Double Black', price: '480 ₺' },
-          { name: 'JW Red Label', price: '330 ₺' }, { name: 'JW Blue Label', price: '2400 ₺' },
-          { name: 'JW 18YO', price: '805 ₺' }, { name: "Teacher's", price: '300 ₺' },
-          { name: 'JW Black Label', price: '420 ₺' }, { name: 'Dimple Golden Selection', price: '360 ₺' },
-          { name: 'JW Gold Label', price: '600 ₺' }
-        ]}]},
-        { name: 'Cin', groups: [{ name: '', items: [
-          { name: 'Roku Japanese Craft', price: '695 ₺' }, { name: 'Bulldog London Dry Gin', price: '480 ₺' },
-          { name: 'Sipsmith London Dry Gin', price: '780 ₺' }, { name: 'Larios London Dry Gin', price: '315 ₺' },
-          { name: 'Larios 12 Premium', price: '360 ₺' }, { name: 'Larios Rose', price: '360 ₺' },
-          { name: 'Bickens London Dry', price: '420 ₺' }, { name: 'Bickens Distilled Pink', price: '420 ₺' },
-          { name: 'Tanqueray No Ten', price: '540 ₺' }, { name: 'Tanqueray Sevilla', price: '480 ₺' }, { name: "Hendrick's", price: '650 ₺' }
-        ]}]},
-        { name: 'Tekila & Mezcal', groups: [{ name: '', items: [
-          { name: 'Espolon Blanco', price: '270 ₺' }, { name: 'Espolon Reposado', price: '290 ₺' },
-          { name: 'El Jimador', price: '200 ₺' }, { name: 'Patron', price: '1900 ₺' },
-          { name: 'Montelobos Espadin', price: '390 ₺' }, { name: 'Montelobos Ensamble', price: '480 ₺' }
-        ]}]},
-        { name: 'Votka, Rom & Konyak', groups: [{ name: '', items: [
-          { name: 'Finlandia', price: '335 ₺' }, { name: 'Finlandia Lime', price: '335 ₺' },
-          { name: 'Finlandia Redberry', price: '335 ₺' }, { name: 'Skyy', price: '325 ₺' },
-          { name: 'Haku', price: '800 ₺' }, { name: 'Smirnoff Red', price: '300 ₺' }, { name: 'Smirnoff North', price: '420 ₺' },
-          { name: 'Captain Morgan White', price: '480 ₺' }, { name: 'Captain Morgan Gold', price: '480 ₺' }, { name: 'Zacapa', price: '600 ₺' },
-          { name: 'Courvoisier VS', price: '720 ₺' }, { name: 'Courvoisier VSOP', price: '960 ₺' }, { name: 'Remy Martin', price: '890 ₺' }
-        ]}]},
-        { name: 'Vermut & Likör', groups: [{ name: '', items: [
-          { name: 'Campari', price: '540 ₺' }, { name: 'Cinzano Prosecco', price: '720 ₺' },
-          { name: 'Cinzano Vermouth Rosso', price: '480 ₺' }, { name: 'Cinzano Vermouth Blanco', price: '480 ₺' }, { name: 'Cinzano Vermouth Extra Dry', price: '480 ₺' },
-          { name: 'Grand Marnier', price: '635 ₺' }, { name: "Bailey's", price: '300 ₺' }, { name: 'Cointreau', price: '480 ₺' },
-          { name: 'Jagermeister', price: '400 ₺' }, { name: 'Disaronna', price: '360 ₺' }, { name: 'Chambord', price: '480 ₺' }
-        ]}]},
-        { name: 'Rakı', groups: [{ name: '', items: [
-          { name: 'Tekirdağ Rakısı Altın Seri', desc: 'Tek · Duble', price: '470 ₺ · 540 ₺' }
-        ]}]}
-      ]}
-    ];
   }
 
-  componentDidMount() {
+  _loadMenuData() {
+    fetch('./data/menu.json')
+      .then(res => res.json())
+      .then(data => this._onMenuDataLoaded(data))
+      .catch(() => this._onMenuDataLoaded({ campaigns: [], specialty: [], categories: [] }));
+  }
+
+  _onMenuDataLoaded(data) {
+    this.menuData = data;
     const dayMapEnToTr = { Sunday: 'Pazar', Monday: 'Pazartesi', Tuesday: 'Salı', Wednesday: 'Çarşamba', Thursday: 'Perşembe', Friday: 'Cuma', Saturday: 'Cumartesi' };
     let dayEn = 'Monday';
     try { dayEn = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Istanbul', weekday: 'long' }).format(new Date()); } catch (e) {}
     const todayNameTR = dayMapEnToTr[dayEn] || 'Pazartesi';
-    const campaign = this.campaigns[todayNameTR] || null;
+    const campaign = (data.campaigns || []).find(c => c.day === todayNameTR) || null;
     const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const logoIntroDelay = reduced ? 0 : 1100;
 
-    setTimeout(() => this.setState({ showLogoIntro: false }), logoIntroDelay);
-
     if (campaign && !reduced) {
       setTimeout(() => {
-        this.setState({ showIntro: true, todayNameTR, campaignToday: campaign });
+        this.setState({ menuData: data, showIntro: true, todayNameTR, campaignToday: campaign });
         setTimeout(() => this.setState({ introStepOne: true }), 650);
         setTimeout(() => this.dismissIntro(), 1650);
       }, logoIntroDelay);
     } else {
-      this.setState({ todayNameTR, campaignToday: campaign });
+      this.setState({ menuData: data, todayNameTR, campaignToday: campaign });
     }
+  }
+
+  componentDidMount() {
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const logoIntroDelay = reduced ? 0 : 1100;
+    setTimeout(() => this.setState({ showLogoIntro: false }), logoIntroDelay);
+
+    this._loadMenuData();
 
     const consent = localStorage.getItem('defne_cookie_consent');
     if (consent) {
@@ -562,7 +387,10 @@ class Component extends DCLogic {
   render() {}
 
   renderVals() {
-    const allNav = [{ id: 'spesiyelimiz', num: '', title: 'Spesiyelimiz', tag: "Defne'nin İmza Seçkisi" }, ...this.categories.map(c => ({ id: c.id, num: c.num, title: c.title, tag: c.tag }))];
+    const menuData = this.state.menuData || {};
+    const categories = menuData.categories || [];
+    const specialty = menuData.specialty || [];
+    const allNav = [{ id: 'spesiyelimiz', num: '', title: 'Spesiyelimiz', tag: "Defne'nin İmza Seçkisi" }, ...categories.map(c => ({ id: c.id, num: c.num, title: c.title, tag: c.tag }))];
     const tickerText = allNav.filter(c => c.tag).map(c => c.tag).join('   ·   ');
 
     const quickNav = [
@@ -593,8 +421,8 @@ class Component extends DCLogic {
       scrollToCampaignTarget: () => campaignToday && this.scrollToId('section-' + campaignToday.targetId, 58),
       tickerText,
       quickNav,
-      categories: this.categories,
-      specialty: this.specialty,
+      categories,
+      specialty,
       showCookieBanner: this.state.showCookieBanner,
       showCookieManage: this.state.showCookieManage,
       showKvkk: this.state.showKvkk,
