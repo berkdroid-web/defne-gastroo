@@ -444,5 +444,15 @@ class Component extends DCLogic {
 }
 
 </script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", (user) => {
+      if (!user && window.location.hash.includes("confirmation_token")) {
+        document.location.href = "/admin/" + window.location.hash;
+      }
+    });
+  }
+</script>
 </body>
 </html>

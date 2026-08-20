@@ -1,16 +1,20 @@
 backend:
-  name: github
-  repo: berkdroid-web/defne-gastroo
+  name: git-gateway
   branch: main
 
-# ÖNEMLİ: Bu backend tanımı henüz canlıda çalışmaz. GitHub Pages tek başına
-# Decap CMS'in GitHub girişini (OAuth) yürütemez — bunun için ayrı bir OAuth
-# proxy servisi kurulması gerekiyor (örn. bir Netlify sitesine bağlanıp onun
-# OAuth sağlayıcısını kullanmak, ya da kendi barındırdığınız bir proxy: bkz.
-# https://github.com/sterlingwes/netlify-cms-github-oauth-provider). Proxy
-# kurulduğunda buraya şu iki satır eklenmeli:
-#   base_url: https://<oauth-proxy-adresiniz>
-#   auth_endpoint: auth
+# ÖNEMLİ: git-gateway backend'i Netlify Identity + Git Gateway servislerine
+# bağlıdır — bunlar olmadan giriş çalışmaz. Gerekenler:
+#   1. Bu repo (defne-gastroo) bir Netlify sitesine bağlanmalı (Netlify'da
+#      "Import from Git" ile).
+#   2. Netlify site ayarlarından Identity açılmalı (Site settings → Identity
+#      → Enable Identity), kayıt "Invite only" yapılabilir.
+#   3. Identity → Services → Git Gateway açılmalı.
+#   4. admin/index.html içine Netlify Identity widget script'i eklenmiş
+#      olmalı (bu commit'te eklendi) ve kullanıcı Netlify'dan davet linkiyle
+#      giriş yapmalı.
+# Site GitHub Pages'te barındırılmaya devam edebilir; git-gateway sadece
+# giriş/veri yazma işini Netlify üzerinden yürütür, statik siteyi Netlify'a
+# taşımanız gerekmez.
 #
 # Yerelde, giriş yapmadan denemek için:
 #   npx decap-server
